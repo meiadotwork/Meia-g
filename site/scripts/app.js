@@ -49,6 +49,10 @@
     overlay.className = 'zoom';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
+    // Focus lands on the dialog itself rather than the Close button: focusing
+    // a button programmatically draws a focus ring around it even for someone
+    // who arrived by mouse, which reads as a rendering artefact over the work.
+    overlay.setAttribute('tabindex', '-1');
     overlay.setAttribute('aria-label', label + ' — full resolution');
     overlay.innerHTML =
       '<div class="zoom-stage"></div>' +
@@ -187,7 +191,7 @@
     if (!img.src) img.src = fullSrc;      // fetched only on first open
     overlay.classList.add('open');
     document.documentElement.style.overflow = 'hidden';
-    overlay.querySelector('.zoom-close').focus();
+    overlay.focus({ preventScroll: true });
     if (loaded) reset();
   }
 

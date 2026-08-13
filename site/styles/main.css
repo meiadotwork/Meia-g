@@ -93,16 +93,21 @@ nav a {
 nav a:hover,
 nav a[aria-current="page"] { color: var(--ink); }
 
-/* mobile nav collapses to a scrollable strip rather than a hamburger —
-   five items, no need to hide them behind a tap */
+/* Mobile keeps all five items visible rather than hiding them behind a
+   hamburger. They wrap onto a second line — a horizontally scrolling strip
+   clipped "Contact" mid-word, which reads as breakage rather than design. */
 @media (max-width: 40rem) {
-  header { height: auto; flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-top: 1rem; padding-bottom: 0.75rem; }
-  nav { width: 100%; overflow-x: auto; gap: 1.1rem; scrollbar-width: none; }
-  nav::-webkit-scrollbar { display: none; }
-  :root { --head-h: 6rem; }
+  header { height: auto; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding-top: 1rem; padding-bottom: 0.75rem; }
+  nav { width: 100%; flex-wrap: wrap; gap: 0.5rem 1rem; }
+  :root { --head-h: 7rem; }
 }
 
 main { padding-top: var(--head-h); }
+
+/* The fixed header already supplies the breathing room at the top of a page;
+   a full section's padding on top of it just reads as a gap. */
+main > .section:first-child { padding-top: clamp(1.5rem, 4vh, 3rem); }
+main > .hero:first-child { padding-top: 0; }
 
 /* ------------------------------ landing ----------------------------- */
 
@@ -337,6 +342,7 @@ footer a:hover { color: var(--ink); }
   touch-action: none;
 }
 .zoom[open], .zoom.open { display: block; }
+.zoom:focus { outline: none; }   /* it is a focus target, not a control */
 
 .zoom-stage {
   position: absolute;

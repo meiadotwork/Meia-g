@@ -219,7 +219,9 @@ function indexPage(m) {
 function workIndexPage(m) {
   const sections = seriesList
     .map((s) => {
-      const inSeries = works.filter((w) => w.series === s.id);
+      // Only works that actually have a built image — otherwise the index
+      // links to a page that was never generated.
+      const inSeries = works.filter((w) => w.series === s.id && m.works[w.id] && m.works[w.id].primary);
       if (!inSeries.length) return '';
       return `<section class="section">
   <div class="section-head">
@@ -363,7 +365,7 @@ function write(rel, html) {
   fs.writeFileSync(file, html);
 }
 
-function copyStatic() {
+function copyStatic(built) {
   const copyDir = (from, to) => {
     fs.mkdirSync(to, { recursive: true });
     for (const e of fs.readdirSync(from, { withFileTypes: true })) {
@@ -379,7 +381,7 @@ function copyStatic() {
 
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`);
 
-  const urls = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/'].concat(works.map((w) => `/work/${w.id}/`));
+  const urls = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/'].concat(built.map((w) => `/work/${w.id}/`));
   write(
     'sitemap.xml',
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -439,7 +441,7 @@ function gapsReport() {
     current: '', canonical: '/404.html',
   }));
 
-  copyStatic();
+  copyStatic(present);
 
   const totalBytes = present.reduce((n, w) => {
     const e = manifest.works[w.id].primary;

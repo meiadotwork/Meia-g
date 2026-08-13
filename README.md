@@ -54,6 +54,20 @@ screenshot, and no setting inside Squarespace can avoid it.
 The display tier beats a high-quality JPEG on both measures at 60% of the
 bytes. The zoom tier is better than anything a platform will serve at any size.
 
+![Encoding comparison](docs/encoding-comparison.png)
+
+*Left: what meia-g.art serves today. Right: the same master through this
+pipeline. Both 2500px, so the difference is encoding alone — note the smeared
+facet edges and the paint grain collapsing into blotches on the left. Crop
+shown at 2× with shadows lifted equally on both sides.*
+
+R-00-01 was chosen for that comparison because it is the **least** affected
+work in the catalogue: its master is already 2500px, so nothing is lost to the
+size cap and only the re-encode is visible. Most of the others are 3300–4600px
+masters, which lose roughly a third of their linear resolution on top of what
+is shown above. `docs/reported-problem.jpg` is the original side-by-side that
+prompted this.
+
 Three decisions do most of that work, all in `scripts/images.js`:
 
 - **`pipelineColourspace('rgb16')`** — resampling happens in 16-bit, so the dark
