@@ -136,6 +136,7 @@
       "master": "R-01-04/R-01-04_MD.jpg",
       "install": null,
       "room": null,
+      "note": "Two candidates exist at identical dimensions: _MD (4:4:4, 1.47MB) and R-01-04.jpg (4:2:0, 2.38MB). _MD is used despite being the smaller file — measured, it holds more luma detail (laplacian variance 33.7 vs 32.2) and the same chroma spread. The larger file is the worse original.",
       "alt": "Reflective vertical form compresses into a rounded base, distorting a dark patterned field through elongated reflections.",
       "description": "A vertical reflective form descends into a compressed base, where curvature intensifies distortion. Its surface stretches and bends the surrounding field into elongated bands. The patterned ground shifts beneath it, destabilizing depth and sustaining tension between structure, surface and perception.",
       "needs": ["year", "medium", "dimensions"]

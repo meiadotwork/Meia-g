@@ -88,6 +88,20 @@ full-resolution file never does — it is the painting, untouched.
 
 ---
 
+### Verified, not assumed
+
+- Colour is carried through intact. Master and derivative, both normalised to
+  8-bit sRGB, differ by **less than 0.5/255 on every channel**, with the deltas
+  mixed in sign — lossy rounding, not a cast. sRGB profiles are attached to
+  every output.
+- The full-resolution file is **not** in any `srcset`, so no browser pulls a
+  600 KB image to lay out a thumbnail. It is fetched only when the viewer opens.
+- Fallback JPEGs are 4:4:4 with profiles attached.
+- Viewer checked in Chromium: 1:1 reports actual size, panning clamps at the
+  edges, `Esc` restores scroll, no console errors.
+
+`npm run check` re-runs the structural half of that on every build.
+
 ## Structure
 
 ```
