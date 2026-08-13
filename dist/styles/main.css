@@ -1,30 +1,41 @@
 /* ------------------------------------------------------------------
    Meia G — meia-g.art
 
-   The ground is near-black on purpose. These paintings are built on
-   controlled black grounds, and a white page turns each one into a dark
-   rectangle punched in a bright wall. On this ground the canvas edge
-   dissolves and the chrome carries, which is how the work is meant to
-   be met. To hang it on a white wall instead, change --ground and --ink
-   below; nothing else assumes a dark theme.
+   White ground, typewriter face. The page is the gallery wall and the
+   work hangs on it; every reproduction carries a hairline edge so a
+   pale install shot does not bleed into the paper.
+
+   Every colour is a token below. The one intentional exception to the
+   white is --viewer-ground: the full-resolution viewer stays dark,
+   because judging the separation between near-black planes with a lit
+   white surround fights the eye's adaptation. Set it to var(--ground)
+   for a white viewer too.
    ------------------------------------------------------------------ */
 
 :root {
-  --ground: #0a0a0b;
-  --ground-lift: #101012;
-  --ink: #ededea;
-  --muted: #8b8b88;
-  --faint: #5a5a58;
-  --rule: #1e1e21;
+  --ground: #ffffff;
+  --ground-lift: #f4f4f1;   /* image wells, before a picture loads */
+  --ink: #111110;
+  --muted: #5f5f5c;         /* 6.0:1 on white */
+  --faint: #757570;         /* 4.5:1 — the floor for 12px labels */
+  --rule: #dedad2;          /* warm hairline, keyed to the paper */
 
-  --measure: 64ch;
+  --viewer-ground: #0b0b0c;
+  --viewer-ink: #e8e8e4;
+  --viewer-faint: #8a8a85;
+
+  --measure: 62ch;
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --head-h: 4.5rem;
 
-  --sans: "Helvetica Neue", Helvetica, Inter, ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
+  /* A real typewriter face where the machine has one, Courier everywhere
+     else. Both read as typed; neither is a generic UI mono. */
+  --sans: "American Typewriter", "Courier New", Courier, ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --micro: 0.6875rem;   /* 11px — labels, captions, nav */
-  --track: 0.14em;
+  /* Monospace runs small and light, so labels go up a step from 11px and
+     the tracking comes down — mono is already wide without help. */
+  --micro: 0.75rem;
+  --track: 0.08em;
 
   --fade: 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -48,7 +59,14 @@ body {
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 
-::selection { background: #2a2a2e; color: #fff; }
+::selection { background: #e6e1d6; color: var(--ink); }
+
+/* A reproduction on white paper needs its own edge — without it the pale
+   wall in an installation shot runs straight into the page. */
+.tile-frame,
+.plate img,
+.views img,
+.hero img { box-shadow: 0 0 0 1px var(--rule); }
 
 /* --- label type: the small caps used for nav, captions, section marks --- */
 .label,
@@ -336,7 +354,8 @@ footer a:hover { color: var(--ink); }
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #000;
+  background: var(--viewer-ground);
+  color: var(--viewer-ink);
   display: none;
   overscroll-behavior: contain;
   touch-action: none;
@@ -368,7 +387,7 @@ footer a:hover { color: var(--ink); }
   align-items: center;
   gap: 1rem;
   padding: 1rem var(--gutter);
-  color: var(--muted);
+  color: var(--viewer-faint);
   font-size: var(--micro);
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -382,7 +401,7 @@ footer a:hover { color: var(--ink); }
   top: 0;
   right: 0;
   padding: 1.35rem var(--gutter);
-  color: var(--muted);
+  color: var(--viewer-faint);
   background: none;
   border: 0;
   font: inherit;
@@ -391,16 +410,16 @@ footer a:hover { color: var(--ink); }
   text-transform: uppercase;
   cursor: pointer;
 }
-.zoom-close:hover { color: var(--ink); }
+.zoom-close:hover { color: var(--viewer-ink); }
 
-.zoom-status { color: var(--faint); }
+.zoom-status { color: var(--viewer-faint); }
 
 .zoom-loading {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  color: var(--faint);
+  color: var(--viewer-faint);
   font-size: var(--micro);
   letter-spacing: var(--track);
   text-transform: uppercase;

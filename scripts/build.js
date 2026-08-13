@@ -129,7 +129,7 @@ function layout({ title, description, body, current, ogImage, canonical }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${site.domain}${canonical}">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="theme-color" content="${site.themeColor || '#ffffff'}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:title" content="${esc(title)}">
@@ -377,7 +377,7 @@ function copyStatic(built) {
   copyDir(path.join(ROOT, 'site', 'scripts'), path.join(DIST, 'scripts'));
 
   // A wordmark favicon — no binary asset to keep in sync.
-  write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0a0a0b"/><text x="16" y="21" font-family="Helvetica,Arial,sans-serif" font-size="13" font-weight="600" fill="#ededea" text-anchor="middle">M</text></svg>`);
+  write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#ffffff"/><rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="#dedad2"/><text x="16" y="22" font-family="American Typewriter,Courier New,Courier,monospace" font-size="16" fill="#111110" text-anchor="middle">M</text></svg>`);
 
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`);
 
