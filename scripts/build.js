@@ -394,7 +394,9 @@ function copyStatic(built) {
   // github.io URL to it. While meia-g.art still points at Squarespace that
   // makes the new site look broken instead of previewable. Set customDomain
   // in data/site.json once DNS is ready to switch.
+  const cnamePath = path.join(DIST, 'CNAME');
   if (site.customDomain) write('CNAME', site.customDomain + '\n');
+  else if (fs.existsSync(cnamePath)) fs.unlinkSync(cnamePath);   // clear a stale one
 }
 
 /** What still needs Meia's input, so it is visible rather than silently absent. */
