@@ -1,0 +1,210 @@
+{
+  "$comment": "Single source of truth for the catalogue. `needs` lists fields Meia still has to supply — the site simply omits anything null, so nothing is ever invented. Add a work by adding an object here and dropping its files in masters/<id>/.",
+
+  "series": [
+    {
+      "id": "R-02",
+      "title": "Fields",
+      "note": "Constructed perceptual fields. No object, no focal point — depth produced entirely through repetition, compression and the behaviour of light across a black ground."
+    },
+    {
+      "id": "R-01",
+      "title": "Reflections",
+      "note": "Chrome forms set against patterned black grounds. The surface carries no colour of its own; what appears is produced by everything around it."
+    },
+    {
+      "id": "R-00",
+      "title": "Origins",
+      "note": "Early faceted studies on paper — the geometric logic the later work is built on."
+    }
+  ],
+
+  "works": [
+    {
+      "id": "R-02-06",
+      "series": "R-02",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-02-06/R-02-06_HD.jpg",
+      "install": "R-02-06/R-02-06_WW.jpg",
+      "room": "R-02-06/R-02-06_WF.jpg",
+      "alt": "Black geometric field of repeating angular planes curving inward, depth produced through repetition and shifting light.",
+      "description": null,
+      "needs": ["year", "medium", "dimensions", "description"]
+    },
+    {
+      "id": "R-02-05",
+      "series": "R-02",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-02-05/R-02-05_HD.jpg",
+      "install": "R-02-05/R-02-05_WW.jpg",
+      "room": "R-02-05/R-02-05_WF.jpg",
+      "alt": null,
+      "description": null,
+      "needs": ["year", "medium", "dimensions", "alt", "description"],
+      "note": "The .txt shipped with this work repeats R-02-03's alt text and description word for word, so it is not used here. Needs its own."
+    },
+    {
+      "id": "R-02-04",
+      "series": "R-02",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-02-04/R-02-04.jpg",
+      "install": "R-02-04/R-02-04_WW.jpg",
+      "room": "R-02-04/R-02-04_WF.jpg",
+      "alt": null,
+      "description": null,
+      "needs": ["year", "medium", "dimensions", "alt", "description"]
+    },
+    {
+      "id": "R-02-03",
+      "series": "R-02",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-02-03/R-02-03.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Dark geometric field of fragmented forms bending inward, creating a vortex-like depth through repetition and shifting planes.",
+      "description": "Fragmented geometric units curve into a vortex-like structure where depth is constructed through compression and repetition. Light and shadow articulate a shifting field, destabilizing orientation and producing a controlled tension between surface continuity and spatial collapse.",
+      "text": "This work operates as a constructed perceptual field rather than an image. A network of fragmented geometric units is organized into a curved, vortex-like structure, where repetition becomes the primary mechanism for producing spatial depth. The forms do not describe volume in a traditional sense; instead, they generate the sensation of depth through compression, fragmentation, and controlled variation.\n\nThe surface resists a stable reading. As the eye moves across the painting, orientation begins to shift — what appears as protrusion in one moment flattens or recedes in the next. This instability is not accidental but structured, emerging from the precise relationship between light, shadow, and edge definition. The work does not depict space; it constructs a condition in which space is continuously negotiated.\n\nThere is no fixed focal point. Instead, the viewer is drawn into a circulating movement that pulls perception inward, creating a sense of immersion without resolution. The vortex is not a literal form but a perceptual effect — an outcome of the system governing the image.\n\nIn this sense, the painting functions as an active field where seeing becomes unstable, and form exists only through the continuous adjustment of perception.",
+      "needs": ["year", "medium", "dimensions"]
+    },
+    {
+      "id": "R-02-02",
+      "series": "R-02",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-02-02/R-02-02_HD.JPG",
+      "install": null,
+      "room": null,
+      "alt": "Black geometric pattern of layered elliptical forms creating depth through repetition, shadow, and subtle surface shifts.",
+      "description": "A field of repeated elliptical forms constructs a spatial rhythm where depth emerges through subtle shifts in light and shadow. The surface operates as a perceptual system, destabilizing orientation and compressing volume into a controlled visual tension.",
+      "needs": ["year", "medium", "dimensions"]
+    },
+    {
+      "id": "R-02-01",
+      "series": "R-02",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-02-01/RAW/R-02-01.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Dark geometric field of repeating blocks creates shifting depth, where light and shadow destabilize spatial continuity.",
+      "description": "A dense geometric field of repeating blocks constructs an unstable spatial system. Light and shadow shift across its surface, producing fluctuating depth without fixed orientation. The structure resists resolution, sustaining tension through pattern, compression and ambiguity.",
+      "needs": ["year", "medium", "dimensions"]
+    },
+
+    {
+      "id": "R-01-06",
+      "series": "R-01",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-01-06/R-01-06_hd.jpg",
+      "install": "R-01-06/R-01-06_ww.jpg",
+      "room": "R-01-06/R-01-06_WF.jpg",
+      "alt": null,
+      "description": null,
+      "needs": ["year", "medium", "dimensions", "alt", "description"]
+    },
+    {
+      "id": "R-01-05",
+      "series": "R-01",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-01-05/R-01-05_hd.JPG",
+      "install": "R-01-05/R-01-05_ww.jpg",
+      "room": null,
+      "alt": null,
+      "description": null,
+      "needs": ["year", "medium", "dimensions", "alt", "description"]
+    },
+    {
+      "id": "R-01-04",
+      "series": "R-01",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-01-04/R-01-04_MD.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Reflective vertical form compresses into a rounded base, distorting a dark patterned field through elongated reflections.",
+      "description": "A vertical reflective form descends into a compressed base, where curvature intensifies distortion. Its surface stretches and bends the surrounding field into elongated bands. The patterned ground shifts beneath it, destabilizing depth and sustaining tension between structure, surface and perception.",
+      "needs": ["year", "medium", "dimensions"]
+    },
+    {
+      "id": "R-01-03",
+      "series": "R-01",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-01-03/R-01-03_HD.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Chrome-like form rises against a dark field, reflecting and distorting space while a floating element hovers above.",
+      "description": "A vertical reflective form emerges from a dark field, its surface bending and distorting surrounding space. A floating element above reinforces instability. The patterned ground subtly shifts, preventing spatial resolution and maintaining a continuous tension between form, field, and perception.",
+      "needs": ["year", "medium", "dimensions"]
+    },
+    {
+      "id": "R-01-02",
+      "series": "R-01",
+      "year": null,
+      "medium": "Oil and acrylic on canvas",
+      "dimensions": null,
+      "master": "R-01-02/raw/R-01-02 C.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Looping reflective form twists over a dark patterned field, distorting space through continuous curvature.",
+      "description": "A looping form twists through itself, creating unstable spatial tension. Its surface behaves like reflection, distorting the surrounding field. The dark patterned ground is bent and reinterpreted, preventing a fixed viewpoint and keeping perception in constant adjustment.",
+      "needs": ["year", "dimensions"]
+    },
+    {
+      "id": "R-01-01",
+      "series": "R-01",
+      "year": 2025,
+      "medium": "Oil and acrylic on canvas",
+      "dimensions": "30 × 40 in",
+      "master": "R-01-01/raw/R-01-01A.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Reflective ribbon form looping in continuous curves against a dark geometric background with green, gold, and blue tones.",
+      "description": "A continuous ribbon-like form loops and folds across the surface, creating overlapping curves. Its reflective surface carries bands of green, gold, and blue, shifting across the structure. The form stands against a dark patterned background, emphasizing contrast and continuity.",
+      "needs": []
+    },
+
+    {
+      "id": "R-00-02",
+      "series": "R-00",
+      "year": null,
+      "medium": null,
+      "dimensions": null,
+      "master": "R-00-02/R-00-02_HD.jpg",
+      "install": null,
+      "room": null,
+      "alt": null,
+      "description": null,
+      "needs": ["year", "medium", "dimensions", "alt", "description"]
+    },
+    {
+      "id": "R-00-01",
+      "series": "R-00",
+      "year": 2016,
+      "medium": "Acrylic on paper",
+      "dimensions": "34 × 34 in",
+      "master": "R-00-01/R-00-01_HD.jpg",
+      "install": null,
+      "room": null,
+      "alt": "Dark faceted surface composed of repeating geometric planes with subtle variations in light and shadow.",
+      "description": null,
+      "needs": ["description"]
+    }
+  ]
+}

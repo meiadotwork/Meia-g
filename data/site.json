@@ -1,0 +1,23 @@
+{
+  "name": "Meia G",
+  "wordmark": "MEIA-G",
+  "domain": "https://www.meia-g.art",
+  "tagline": "Refletismo",
+  "description": "Meia G is a Brazilian-born artist working in New York. His paintings operate as spatial systems rather than images — chrome and controlled black grounds used to expose the instability of perception.",
+  "email": "meiadotexpo@gmail.com",
+  "instagram": { "art": "meia.expo", "tattoo": "meia.work" },
+  "location": "New York",
+  "$hero": "The landing image, and the preview when the site is shared. A chrome work is used deliberately: an R-02 field on a black page can read as an image that failed to load, and previews as a black rectangle on Instagram or in a message. Change to any id in works.json.",
+  "hero": "R-01-01",
+
+  "$selected": "The landing sequence. Alternates chrome and field so the page has a rhythm rather than six near-identical black rectangles.",
+  "selected": ["R-02-06", "R-01-05", "R-02-03", "R-01-03", "R-02-04", "R-01-06"],
+
+  "nav": [
+    { "label": "Work", "href": "/work/" },
+    { "label": "Refletismo", "href": "/refletismo/" },
+    { "label": "Statement", "href": "/statement/" },
+    { "label": "Bio", "href": "/bio/" },
+    { "label": "Contact", "href": "/contact/" }
+  ]
+}

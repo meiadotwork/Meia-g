@@ -1,0 +1,7 @@
+node_modules/
+
+# Camera originals — 1.3 GB, kept in Dropbox, never in git.
+# See README: point MASTERS_DIR at them, or symlink them to ./masters.
+# Both spellings: the second catches `masters` when it is a symlink.
+masters/
+masters
