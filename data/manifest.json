@@ -1,135 +1,5 @@
 {
   "works": {
-    "R-02-05": {
-      "primary": {
-        "width": 3043,
-        "height": 4062,
-        "aspect": 0.749138,
-        "avif": [
-          {
-            "w": 640,
-            "src": "/img/R-02-05/R-02-05-primary-640.avif",
-            "bytes": 43375
-          },
-          {
-            "w": 1024,
-            "src": "/img/R-02-05/R-02-05-primary-1024.avif",
-            "bytes": 119697
-          },
-          {
-            "w": 1600,
-            "src": "/img/R-02-05/R-02-05-primary-1600.avif",
-            "bytes": 300485
-          },
-          {
-            "w": 2200,
-            "src": "/img/R-02-05/R-02-05-primary-2200.avif",
-            "bytes": 482446
-          },
-          {
-            "w": 3000,
-            "src": "/img/R-02-05/R-02-05-primary-3000.avif",
-            "bytes": 811022
-          }
-        ],
-        "jpeg": [
-          {
-            "w": 1024,
-            "src": "/img/R-02-05/R-02-05-primary-1024.jpg",
-            "bytes": 152179
-          },
-          {
-            "w": 2200,
-            "src": "/img/R-02-05/R-02-05-primary-2200.jpg",
-            "bytes": 727484
-          }
-        ],
-        "lqip": "data:image/webp;base64,UklGRhwAAABXRUJQVlA4TBAAAAAvAAAAAAfQ//73v/+BiOh/AAA=",
-        "source": "provisional",
-        "full": {
-          "w": 3043,
-          "src": "/img/R-02-05/R-02-05-primary-full.avif",
-          "bytes": 1617267
-        }
-      },
-      "install": {
-        "width": 3000,
-        "height": 4500,
-        "aspect": 0.666667,
-        "avif": [
-          {
-            "w": 640,
-            "src": "/img/R-02-05/R-02-05-install-640.avif",
-            "bytes": 45575
-          },
-          {
-            "w": 1024,
-            "src": "/img/R-02-05/R-02-05-install-1024.avif",
-            "bytes": 117110
-          },
-          {
-            "w": 1600,
-            "src": "/img/R-02-05/R-02-05-install-1600.avif",
-            "bytes": 271213
-          },
-          {
-            "w": 2200,
-            "src": "/img/R-02-05/R-02-05-install-2200.avif",
-            "bytes": 426336
-          },
-          {
-            "w": 3000,
-            "src": "/img/R-02-05/R-02-05-install-3000.avif",
-            "bytes": 655266
-          }
-        ],
-        "jpeg": [
-          {
-            "w": 1024,
-            "src": "/img/R-02-05/R-02-05-install-1024.jpg",
-            "bytes": 164790
-          },
-          {
-            "w": 2200,
-            "src": "/img/R-02-05/R-02-05-install-2200.jpg",
-            "bytes": 742269
-          }
-        ],
-        "lqip": "data:image/webp;base64,UklGRhwAAABXRUJQVlA4TBAAAAAvAAAAAAfQ//73v/+BiOh/AAA=",
-        "source": "provisional"
-      },
-      "room": {
-        "width": 1024,
-        "height": 1365,
-        "aspect": 0.750183,
-        "avif": [
-          {
-            "w": 640,
-            "src": "/img/R-02-05/R-02-05-room-640.avif",
-            "bytes": 41812
-          },
-          {
-            "w": 1024,
-            "src": "/img/R-02-05/R-02-05-room-1024.avif",
-            "bytes": 84468
-          }
-        ],
-        "jpeg": [
-          {
-            "w": 1024,
-            "src": "/img/R-02-05/R-02-05-room-1024.jpg",
-            "bytes": 136724
-          },
-          {
-            "w": 1086,
-            "src": "/img/R-02-05/R-02-05-room-1086.jpg",
-            "bytes": 144915
-          }
-        ],
-        "lqip": "data:image/webp;base64,UklGRhwAAABXRUJQVlA4TBAAAAAvAAAAAAfQ//73v/+BiOh/AAA=",
-        "source": "provisional"
-      }
-    },
     "R-02-06": {
       "primary": {
         "width": 3337,
@@ -174,8 +44,8 @@
             "bytes": 542608
           }
         ],
-        "lqip": "data:image/webp;base64,UklGRhwAAABXRUJQVlA4TBAAAAAvAAAAAAfQ//73v/+BiOh/AAA=",
-        "source": "provisional",
+        "lqip": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADwAgCdASoUABsAPrVUpE0nJKOiKAgA4BaJaQAAPaXUAAD+8zs5F298fHgNCxAAAAA=",
+        "source": "R-02-06_HD.jpg",
         "full": {
           "w": 3337,
           "src": "/img/R-02-06/R-02-06-primary-full.avif",
@@ -183,8 +53,8 @@
         }
       },
       "install": {
-        "width": 3000,
-        "height": 4500,
+        "width": 3648,
+        "height": 5472,
         "aspect": 0.666667,
         "avif": [
           {
@@ -225,13 +95,13 @@
             "bytes": 680642
           }
         ],
-        "lqip": "data:image/webp;base64,UklGRhwAAABXRUJQVlA4TBAAAAAvAAAAAAfQ//73v/+BiOh/AAA=",
-        "source": "provisional"
+        "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAACQBACdASoUAB4APrVOoUmnJKOhKA1Q4BaJaQDPoBEa5dM8SnbHCDEfieoQ/kAA/rbKKQpB1W3IMFAJm9wfPxzLLNUzDJYzc8pnGPVLVuZ/qHBW9I5NCbLF28AAAA==",
+        "source": "R-02-06_WW.jpg"
       },
       "room": {
-        "width": 1024,
-        "height": 1365,
-        "aspect": 0.750183,
+        "width": 1086,
+        "height": 1448,
+        "aspect": 0.75,
         "avif": [
           {
             "w": 640,
@@ -256,8 +126,949 @@
             "bytes": 136651
           }
         ],
-        "lqip": "data:image/webp;base64,UklGRhwAAABXRUJQVlA4TBAAAAAvAAAAAAfQ//73v/+BiOh/AAA=",
-        "source": "provisional"
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwBACdASoUABsAPrVMoUqnJCMhsBgIAOAWiWkAAC51y6Wqcb6/Ai0a8DFhj/cAAP7VF8dTJZswqxcET0PNSuONKsfBSKCCCPbIQBSkPBEcBdZLYl5unqAAAAA=",
+        "source": "R-02-06_WF.jpg"
+      }
+    },
+    "R-02-05": {
+      "primary": {
+        "width": 3043,
+        "height": 4062,
+        "aspect": 0.749138,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-05/R-02-05-primary-640.avif",
+            "bytes": 43375
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-05/R-02-05-primary-1024.avif",
+            "bytes": 119697
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-05/R-02-05-primary-1600.avif",
+            "bytes": 300485
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-05/R-02-05-primary-2200.avif",
+            "bytes": 482446
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-02-05/R-02-05-primary-3000.avif",
+            "bytes": 811022
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-05/R-02-05-primary-1024.jpg",
+            "bytes": 152179
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-05/R-02-05-primary-2200.jpg",
+            "bytes": 727484
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAwCdASoUABsAPrVSok2uJKMjKAgBwBaJaQDG9Bi5KDAA/vJ7x+Bxe0hPN3Mf8N4NCPl0iJMQ4zSn8AA=",
+        "source": "R-02-05_HD.jpg",
+        "full": {
+          "w": 3043,
+          "src": "/img/R-02-05/R-02-05-primary-full.avif",
+          "bytes": 1617267
+        }
+      },
+      "install": {
+        "width": 3648,
+        "height": 5472,
+        "aspect": 0.666667,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-05/R-02-05-install-640.avif",
+            "bytes": 45575
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-05/R-02-05-install-1024.avif",
+            "bytes": 117110
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-05/R-02-05-install-1600.avif",
+            "bytes": 271213
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-05/R-02-05-install-2200.avif",
+            "bytes": 426336
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-02-05/R-02-05-install-3000.avif",
+            "bytes": 655266
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-05/R-02-05-install-1024.jpg",
+            "bytes": 164790
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-05/R-02-05-install-2200.jpg",
+            "bytes": 742269
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAABQBACdASoUAB4APplClkmlpCIhN+gAsBMJaQDPoDJRjldUkbgoCB29EgjIAPy0/PcLDkDlscWig/bey8mcX/I0j/1Djbcp64sXYIlQLatPDAAA",
+        "source": "R-02-05_WW.jpg"
+      },
+      "room": {
+        "width": 1086,
+        "height": 1448,
+        "aspect": 0.75,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-05/R-02-05-room-640.avif",
+            "bytes": 41812
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-05/R-02-05-room-1024.avif",
+            "bytes": 84468
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-05/R-02-05-room-1024.jpg",
+            "bytes": 136724
+          },
+          {
+            "w": 1086,
+            "src": "/img/R-02-05/R-02-05-room-1086.jpg",
+            "bytes": 144915
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAACwBACdASoUABsAPrVQoUsnJKMhsBgIAOAWiWkAAC51xFISTdK9ytD0BE4v7gEAAP7VF8dTKVtxEYYqx3YZaM1P7+wluDw/QEFTNBqqsguNyul+HxBhG3rK7EcAAA==",
+        "source": "R-02-05_WF.jpg"
+      }
+    },
+    "R-02-04": {
+      "primary": {
+        "width": 3443,
+        "height": 4533,
+        "aspect": 0.759541,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-04/R-02-04-primary-640.avif",
+            "bytes": 22400
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-04/R-02-04-primary-1024.avif",
+            "bytes": 54494
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-04/R-02-04-primary-1600.avif",
+            "bytes": 186869
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-04/R-02-04-primary-2200.avif",
+            "bytes": 355774
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-02-04/R-02-04-primary-3000.avif",
+            "bytes": 802170
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-04/R-02-04-primary-1024.jpg",
+            "bytes": 85435
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-04/R-02-04-primary-2200.jpg",
+            "bytes": 549206
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAgCdASoUABoAPrVUpE2nJKOiKAgA4BaJaQAAPgC+4AD+8jsPRc99CFWeTcyUkzVgAAAA",
+        "source": "R-02-04.jpg",
+        "full": {
+          "w": 3443,
+          "src": "/img/R-02-04/R-02-04-primary-full.avif",
+          "bytes": 3062663
+        }
+      },
+      "install": {
+        "width": 3648,
+        "height": 5472,
+        "aspect": 0.666667,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-04/R-02-04-install-640.avif",
+            "bytes": 24482
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-04/R-02-04-install-1024.avif",
+            "bytes": 52303
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-04/R-02-04-install-1600.avif",
+            "bytes": 163168
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-04/R-02-04-install-2200.avif",
+            "bytes": 301161
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-02-04/R-02-04-install-3000.avif",
+            "bytes": 502664
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-04/R-02-04-install-1024.jpg",
+            "bytes": 104928
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-04/R-02-04-install-2200.jpg",
+            "bytes": 576682
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQBACdASoUAB4ALoVarVaipySkhwCES0gABc01f2HCLDy5AoN2KpiEoAD+x4Phhji6+YYfpeQsNjvW13Ok6urIXs00v9v6b4fcivlG9lJ27aSKfBkp3z2AAAA=",
+        "source": "R-02-04_WW.jpg"
+      },
+      "room": {
+        "width": 1086,
+        "height": 1448,
+        "aspect": 0.75,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-04/R-02-04-room-640.avif",
+            "bytes": 39507
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-04/R-02-04-room-1024.avif",
+            "bytes": 76399
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-04/R-02-04-room-1024.jpg",
+            "bytes": 127020
+          },
+          {
+            "w": 1086,
+            "src": "/img/R-02-04/R-02-04-room-1086.jpg",
+            "bytes": 133446
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwBACdASoUABsAPrVOoUunJCMhsBgIAOAWiWkAAC51xFISTdLCOi6Nhx51UGeAAP7VF8dTJZswrrlya+Ppln62yzscEGH48I4uFr3FChzwxGP7YCzcxF7AAAA=",
+        "source": "R-02-04_WF.jpg"
+      }
+    },
+    "R-02-03": {
+      "primary": {
+        "width": 3439,
+        "height": 4563,
+        "aspect": 0.753671,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-03/R-02-03-primary-640.avif",
+            "bytes": 68548
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-03/R-02-03-primary-1024.avif",
+            "bytes": 195272
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-03/R-02-03-primary-1600.avif",
+            "bytes": 480857
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-03/R-02-03-primary-2200.avif",
+            "bytes": 733826
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-02-03/R-02-03-primary-3000.avif",
+            "bytes": 1120623
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-03/R-02-03-primary-1024.jpg",
+            "bytes": 212001
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-03/R-02-03-primary-2200.jpg",
+            "bytes": 1007763
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAgCdASoUABsAPrVSoEyuJKoiKAqpwBaJaQAAQrYPkAD+8LeuZKiI+J8bgmAAOZtbXySVFtWg2IMgAAA=",
+        "source": "R-02-03.jpg",
+        "full": {
+          "w": 3439,
+          "src": "/img/R-02-03/R-02-03-primary-full.avif",
+          "bytes": 2121748
+        }
+      }
+    },
+    "R-02-02": {
+      "primary": {
+        "width": 2242,
+        "height": 3000,
+        "aspect": 0.747333,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-02/R-02-02-primary-640.avif",
+            "bytes": 46140
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-02/R-02-02-primary-1024.avif",
+            "bytes": 124880
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-02/R-02-02-primary-1600.avif",
+            "bytes": 323734
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-02/R-02-02-primary-2200.avif",
+            "bytes": 541224
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-02/R-02-02-primary-1024.jpg",
+            "bytes": 163477
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-02/R-02-02-primary-2200.jpg",
+            "bytes": 829363
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACwAwCdASoUABsAPrVQoEynJKMrKAqpYBaJaQAARHGJ3bQ19GjuAAD+8aAOT8V9WchEcc+Hi1FzR/2htDgAAA==",
+        "source": "R-02-02_HD.JPG",
+        "full": {
+          "w": 2242,
+          "src": "/img/R-02-02/R-02-02-primary-full.avif",
+          "bytes": 1138327
+        }
+      }
+    },
+    "R-02-01": {
+      "primary": {
+        "width": 2574,
+        "height": 3414,
+        "aspect": 0.753954,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-02-01/R-02-01-primary-640.avif",
+            "bytes": 53645
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-02-01/R-02-01-primary-1024.avif",
+            "bytes": 116240
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-02-01/R-02-01-primary-1600.avif",
+            "bytes": 232673
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-01/R-02-01-primary-2200.avif",
+            "bytes": 347596
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-02-01/R-02-01-primary-1024.jpg",
+            "bytes": 161506
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-02-01/R-02-01-primary-2200.jpg",
+            "bytes": 567027
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACQAwCdASoUABsAPrVSn0ynJKoiKAqpQBaJaQDJEBmUW2mJASgAAP7wdOO/cdwBiD5QZKa4SZj9Zwp03Jh2y3vS6AAAAA==",
+        "source": "R-02-01.jpg",
+        "full": {
+          "w": 2574,
+          "src": "/img/R-02-01/R-02-01-primary-full.avif",
+          "bytes": 906635
+        }
+      }
+    },
+    "R-01-06": {
+      "primary": {
+        "width": 3456,
+        "height": 4541,
+        "aspect": 0.761066,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-06/R-01-06-primary-640.avif",
+            "bytes": 71401
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-06/R-01-06-primary-1024.avif",
+            "bytes": 165430
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-06/R-01-06-primary-1600.avif",
+            "bytes": 368283
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-06/R-01-06-primary-2200.avif",
+            "bytes": 558327
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-06/R-01-06-primary-3000.avif",
+            "bytes": 864780
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-06/R-01-06-primary-1024.jpg",
+            "bytes": 259407
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-06/R-01-06-primary-2200.jpg",
+            "bytes": 967509
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQBACdASoUABoAPrVKnUmnJKKhMBgMAOAWiWcAzNAQ8M7U6V3Uto+NsrlI2KeHIAD+9XU4CAGNVir0XmyqW3p44I9wYXFDfvdBp5P2do0rnCQA2iJtKPgAAAA=",
+        "source": "R-01-06_hd.jpg",
+        "full": {
+          "w": 3456,
+          "src": "/img/R-01-06/R-01-06-primary-full.avif",
+          "bytes": 1917248
+        }
+      },
+      "install": {
+        "width": 3648,
+        "height": 5472,
+        "aspect": 0.666667,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-06/R-01-06-install-640.avif",
+            "bytes": 74356
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-06/R-01-06-install-1024.avif",
+            "bytes": 169646
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-06/R-01-06-install-1600.avif",
+            "bytes": 370764
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-06/R-01-06-install-2200.avif",
+            "bytes": 568806
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-06/R-01-06-install-3000.avif",
+            "bytes": 866262
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-06/R-01-06-install-1024.jpg",
+            "bytes": 283275
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-06/R-01-06-install-2200.jpg",
+            "bytes": 1048108
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAADwBACdASoUAB4APrVQoUsnJKMhsBgIAOAWiWcAxvQQ8OL0pVLgdSv5EcPXyPpEmQAA/pUPV4XYHu/yfBh3mZcID4uTLgY7Ojill8RhJhj5PpNxUdNun/9rX4a/5OOOuji/V50KgOgkjWYtqwwwA3f7HkDlIAAA",
+        "source": "R-01-06_ww.jpg"
+      },
+      "room": {
+        "width": 1086,
+        "height": 1448,
+        "aspect": 0.75,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-06/R-01-06-room-640.avif",
+            "bytes": 47239
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-06/R-01-06-room-1024.avif",
+            "bytes": 92766
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-06/R-01-06-room-1024.jpg",
+            "bytes": 157250
+          },
+          {
+            "w": 1086,
+            "src": "/img/R-01-06/R-01-06-room-1086.jpg",
+            "bytes": 167979
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADQBACdASoUABsAPrVKokunI6MhsBgIAOAWiWkAAC51y6YX6+Fc1bQZ8BnW7BcwAAD+1RfHUyWbMKsWYDTuBk6XTHGz6An0BmKZjorU0pQUfCTi61ZjMqStOKbL2p9t4CAAAA==",
+        "source": "R-01-06_WF.jpg"
+      }
+    },
+    "R-01-05": {
+      "primary": {
+        "width": 3191,
+        "height": 4243,
+        "aspect": 0.752062,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-05/R-01-05-primary-640.avif",
+            "bytes": 181686
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-05/R-01-05-primary-1024.avif",
+            "bytes": 420607
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-05/R-01-05-primary-1600.avif",
+            "bytes": 932723
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-05/R-01-05-primary-2200.avif",
+            "bytes": 1426776
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-05/R-01-05-primary-3000.avif",
+            "bytes": 2248779
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-05/R-01-05-primary-1024.jpg",
+            "bytes": 643493
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-05/R-01-05-primary-2200.jpg",
+            "bytes": 2244885
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAACQBQCdASoUABsAPrVOo0wnJCMiKAqo4BaJYwC26TZcAAusqWI7fi7rw2fNquzrWloccc4hxAD8NjtxV3lzjinHFhfT8gZZ7SuKDwk2IAuU1Vkwe/yLiY4J9LsM2OEUmMbSVpBZysjbp76t8P7eZz0DHO+hIU4WY2gM6uaRozn6EW4NvOxAtb8XMG6LC7bQkSeh0jw78/dBySEmLztKLh7AP4AAAA==",
+        "source": "R-01-05_hd.JPG",
+        "full": {
+          "w": 3191,
+          "src": "/img/R-01-05/R-01-05-primary-full.avif",
+          "bytes": 3979490
+        }
+      },
+      "install": {
+        "width": 3648,
+        "height": 5472,
+        "aspect": 0.666667,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-05/R-01-05-install-640.avif",
+            "bytes": 168292
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-05/R-01-05-install-1024.avif",
+            "bytes": 385096
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-05/R-01-05-install-1600.avif",
+            "bytes": 850940
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-05/R-01-05-install-2200.avif",
+            "bytes": 1299552
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-05/R-01-05-install-3000.avif",
+            "bytes": 1966806
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-05/R-01-05-install-1024.jpg",
+            "bytes": 613946
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-05/R-01-05-install-2200.jpg",
+            "bytes": 2132200
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAAAwBQCdASoUAB4APrVMoUunJCMhsBgIAOAWiWMAxNgQ6Z6W4kzz3yNmf2iBtKEzVQxsAAD+6FAjJXGpezCgcT2Po28ukgkRiA0iOJvbdUs6T6w1IZJtstqF+UYxkIXXmcUYZX6+r2jHAq3D/uhNLaaO2mO1PNgJFDfHgOlZcn4uV1h6eOU0QIl+bwM09vHHcTraHneoWiB6LCdv7jQ92uLo8AAAAA==",
+        "source": "R-01-05_ww.jpg"
+      }
+    },
+    "R-01-04": {
+      "primary": {
+        "width": 2932,
+        "height": 3974,
+        "aspect": 0.737796,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-04/R-01-04-primary-640.avif",
+            "bytes": 108369
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-04/R-01-04-primary-1024.avif",
+            "bytes": 245922
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-04/R-01-04-primary-1600.avif",
+            "bytes": 511518
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-04/R-01-04-primary-2200.avif",
+            "bytes": 743603
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-04/R-01-04-primary-1024.jpg",
+            "bytes": 398892
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-04/R-01-04-primary-2200.jpg",
+            "bytes": 1310688
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADwBACdASoUABsAPrVOnkonJKKhsAgA4BaJYwCw7BjdaePg6pc173S9GOK9JMKA/fAA/vS9VKrZHA8JIExXxTkLSdqIW/onHRCgB+jkbkitogpZmAraaeSrpdalecvsI/CHd8ksYF+2VkDVtNx7sOrsyAA=",
+        "source": "R-01-04_MD.jpg",
+        "full": {
+          "w": 2932,
+          "src": "/img/R-01-04/R-01-04-primary-full.avif",
+          "bytes": 1339088
+        }
+      }
+    },
+    "R-01-03": {
+      "primary": {
+        "width": 3291,
+        "height": 4418,
+        "aspect": 0.744907,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-03/R-01-03-primary-640.avif",
+            "bytes": 92942
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-03/R-01-03-primary-1024.avif",
+            "bytes": 222967
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-03/R-01-03-primary-1600.avif",
+            "bytes": 467090
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-03/R-01-03-primary-2200.avif",
+            "bytes": 686727
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-03/R-01-03-primary-3000.avif",
+            "bytes": 1012171
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-03/R-01-03-primary-1024.jpg",
+            "bytes": 362205
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-03/R-01-03-primary-2200.jpg",
+            "bytes": 1217772
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAACwBACdASoUABsAPrVWpU0nJKOiKAgA4BaJZwAALnfRj8KIOPi1VLfk1+ozC0YAAP7yrtJn/G8dv5JSXpTdaULCl8EQ/Sn6s0N5z4ZDT43jru0FJ0V3pXA5TG+dQ/ClMIare/d2crI1aSmp7gfIEItAAAA=",
+        "source": "R-01-03_HD.jpg",
+        "full": {
+          "w": 3291,
+          "src": "/img/R-01-03/R-01-03-primary-full.avif",
+          "bytes": 1903303
+        }
+      }
+    },
+    "R-01-02": {
+      "primary": {
+        "width": 3465,
+        "height": 4666,
+        "aspect": 0.742606,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-02/R-01-02-primary-640.avif",
+            "bytes": 116149
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-02/R-01-02-primary-1024.avif",
+            "bytes": 247832
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-02/R-01-02-primary-1600.avif",
+            "bytes": 509583
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-02/R-01-02-primary-2200.avif",
+            "bytes": 754781
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-02/R-01-02-primary-3000.avif",
+            "bytes": 1155684
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-02/R-01-02-primary-1024.jpg",
+            "bytes": 407139
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-02/R-01-02-primary-2200.jpg",
+            "bytes": 1338211
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABwBQCdASoUABsAPrVQn0ynJKKiKAqo4BaJYwCdAAt8Nxo0KEfZDOmW5RPpm0C+zSoHlsqIAP7qNVLPYpzJLxYzWH3VZtmIDwR0vuMOyrwN0+KyrPpaIdTx80PzsFoUV46DYXOuZNbyhvtsWq3iM4BYoJH8FkGRHdYQqVuS7ZR6SUh32qRK/EK/t+hdzPnhUZ/E7tGEvR9FPObDjIFmqAAA",
+        "source": "R-01-02 C.jpg",
+        "full": {
+          "w": 3465,
+          "src": "/img/R-01-02/R-01-02-primary-full.avif",
+          "bytes": 2515164
+        }
+      }
+    },
+    "R-01-01": {
+      "primary": {
+        "width": 3492,
+        "height": 4649,
+        "aspect": 0.751129,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-01-01/R-01-01-primary-640.avif",
+            "bytes": 116850
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-01-01/R-01-01-primary-1024.avif",
+            "bytes": 242203
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-01-01/R-01-01-primary-1600.avif",
+            "bytes": 488561
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-01/R-01-01-primary-2200.avif",
+            "bytes": 726786
+          },
+          {
+            "w": 3000,
+            "src": "/img/R-01-01/R-01-01-primary-3000.avif",
+            "bytes": 1146594
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-01-01/R-01-01-primary-1024.jpg",
+            "bytes": 426938
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-01-01/R-01-01-primary-2200.jpg",
+            "bytes": 1381848
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADwBACdASoUABsAPrVQokunJKMhqAqo4BaJZwDE2BCLwkYq/ElpIPn6qlF2Eq2d1gAA/vM0zjyVZGe6PsKYoWK0oCNASn2BYYIjnAfT6i8orH3AQQcydkp+5pO3Y+x9qnVwnjFb/BM5Y+mG56Kh0AMPfMnuUCmbf8AAAA==",
+        "source": "R-01-01A.jpg",
+        "full": {
+          "w": 3492,
+          "src": "/img/R-01-01/R-01-01-primary-full.avif",
+          "bytes": 2730426
+        }
+      }
+    },
+    "R-00-02": {
+      "primary": {
+        "width": 2500,
+        "height": 2500,
+        "aspect": 1,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-00-02/R-00-02-primary-640.avif",
+            "bytes": 27775
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-00-02/R-00-02-primary-1024.avif",
+            "bytes": 61337
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-00-02/R-00-02-primary-1600.avif",
+            "bytes": 133111
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-00-02/R-00-02-primary-2200.avif",
+            "bytes": 211860
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-00-02/R-00-02-primary-1024.jpg",
+            "bytes": 100360
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-00-02/R-00-02-primary-2200.jpg",
+            "bytes": 406750
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADwAgCdASoUABQAPrVUpE0nJKOiKAgA4BaJaQAAPbVcAAD+8iVdt9LnI+1jz0OkAAA=",
+        "source": "R-00-02_HD.jpg",
+        "full": {
+          "w": 2500,
+          "src": "/img/R-00-02/R-00-02-primary-full.avif",
+          "bytes": 606564
+        }
+      }
+    },
+    "R-00-01": {
+      "primary": {
+        "width": 2500,
+        "height": 2500,
+        "aspect": 1,
+        "avif": [
+          {
+            "w": 640,
+            "src": "/img/R-00-01/R-00-01-primary-640.avif",
+            "bytes": 37700
+          },
+          {
+            "w": 1024,
+            "src": "/img/R-00-01/R-00-01-primary-1024.avif",
+            "bytes": 80493
+          },
+          {
+            "w": 1600,
+            "src": "/img/R-00-01/R-00-01-primary-1600.avif",
+            "bytes": 168825
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-00-01/R-00-01-primary-2200.avif",
+            "bytes": 258296
+          }
+        ],
+        "jpeg": [
+          {
+            "w": 1024,
+            "src": "/img/R-00-01/R-00-01-primary-1024.jpg",
+            "bytes": 114580
+          },
+          {
+            "w": 2200,
+            "src": "/img/R-00-01/R-00-01-primary-2200.jpg",
+            "bytes": 436434
+          }
+        ],
+        "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAwCdASoUABQAPrVQn0ynJKKiKAqo4BaJaQDE2Bd05fAA/vHtQUqWVohWfv6LrLRes9gY35xPCGaWRb6AAA==",
+        "source": "R-00-01_HD.jpg",
+        "full": {
+          "w": 2500,
+          "src": "/img/R-00-01/R-00-01-primary-full.avif",
+          "bytes": 630090
+        }
       }
     }
   }

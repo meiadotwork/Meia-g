@@ -1,0 +1,410 @@
+/* ------------------------------------------------------------------
+   Meia G — meia-g.art
+
+   The ground is near-black on purpose. These paintings are built on
+   controlled black grounds, and a white page turns each one into a dark
+   rectangle punched in a bright wall. On this ground the canvas edge
+   dissolves and the chrome carries, which is how the work is meant to
+   be met. To hang it on a white wall instead, change --ground and --ink
+   below; nothing else assumes a dark theme.
+   ------------------------------------------------------------------ */
+
+:root {
+  --ground: #0a0a0b;
+  --ground-lift: #101012;
+  --ink: #ededea;
+  --muted: #8b8b88;
+  --faint: #5a5a58;
+  --rule: #1e1e21;
+
+  --measure: 64ch;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --head-h: 4.5rem;
+
+  --sans: "Helvetica Neue", Helvetica, Inter, ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
+
+  --micro: 0.6875rem;   /* 11px — labels, captions, nav */
+  --track: 0.14em;
+
+  --fade: 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: #2a2a2e; color: #fff; }
+
+/* --- label type: the small caps used for nav, captions, section marks --- */
+.label,
+nav a,
+.caption,
+.meta,
+footer {
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ------------------------------ header ------------------------------ */
+
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--head-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter);
+  z-index: 60;
+  background: linear-gradient(to bottom, var(--ground) 55%, transparent);
+  mix-blend-mode: normal;
+}
+
+.wordmark {
+  font-size: 0.8125rem;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+}
+
+nav { display: flex; gap: clamp(1rem, 2.5vw, 2.25rem); }
+
+nav a {
+  color: var(--muted);
+  transition: color 260ms ease;
+  padding-block: 0.5rem;
+}
+nav a:hover,
+nav a[aria-current="page"] { color: var(--ink); }
+
+/* Mobile keeps all five items visible rather than hiding them behind a
+   hamburger. They wrap onto a second line — a horizontally scrolling strip
+   clipped "Contact" mid-word, which reads as breakage rather than design. */
+@media (max-width: 40rem) {
+  header { height: auto; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding-top: 1rem; padding-bottom: 0.75rem; }
+  nav { width: 100%; flex-wrap: wrap; gap: 0.5rem 1rem; }
+  :root { --head-h: 7rem; }
+}
+
+main { padding-top: var(--head-h); }
+
+/* The fixed header already supplies the breathing room at the top of a page;
+   a full section's padding on top of it just reads as a gap. */
+main > .section:first-child { padding-top: clamp(1.5rem, 4vh, 3rem); }
+main > .hero:first-child { padding-top: 0; }
+
+/* ------------------------------ landing ----------------------------- */
+
+.hero {
+  min-height: calc(100svh - var(--head-h));
+  display: grid;
+  place-items: center;
+  padding: 2rem var(--gutter) 4rem;
+}
+
+.hero figure { margin: 0; display: grid; justify-items: center; gap: 1.75rem; }
+
+.hero img {
+  max-height: min(74svh, 900px);
+  width: auto;
+  max-width: 100%;
+}
+
+.hero-title {
+  font-size: clamp(1.5rem, 5.5vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  margin: 0;
+  text-align: center;
+}
+
+.hero-sub {
+  color: var(--muted);
+  max-width: 46ch;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 0.9375rem;
+}
+
+/* ------------------------------ sections ---------------------------- */
+
+.section { padding: clamp(4rem, 11vh, 9rem) var(--gutter); }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.1rem;
+  margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.section-head h2 {
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0;
+}
+
+.section-head p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 52ch;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ------------------------------ work grid --------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(23rem, 100%), 1fr));
+  gap: clamp(2.5rem, 6vw, 5.5rem) clamp(2rem, 4vw, 4rem);
+  align-items: end;
+}
+
+/* Works on paper in the R-00 series are square; canvases are portrait.
+   Letting each tile keep its own shape reads as a wall, not a template. */
+.tile { display: block; }
+
+.tile-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--ground-lift);
+}
+
+.tile img {
+  width: 100%;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1), opacity var(--fade);
+}
+
+.tile:hover img { transform: scale(1.012); }
+
+.caption {
+  margin-top: 1rem;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+}
+.caption .id { color: var(--ink); }
+
+/* ------------------------------ work page --------------------------- */
+
+.plate { padding: clamp(1rem, 3vh, 3rem) var(--gutter) 0; display: grid; justify-items: center; }
+
+.plate-figure { margin: 0; display: grid; justify-items: center; gap: 1.5rem; width: 100%; }
+
+.plate img {
+  max-height: 82svh;
+  width: auto;
+  max-width: 100%;
+  cursor: zoom-in;
+}
+
+.plate-caption {
+  text-align: center;
+  color: var(--muted);
+  display: grid;
+  gap: 0.35rem;
+}
+.plate-caption .id {
+  color: var(--ink);
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+}
+.plate-caption .zoom-hint {
+  color: var(--faint);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+}
+
+.prose {
+  max-width: var(--measure);
+  margin: clamp(3rem, 9vh, 7rem) auto 0;
+  padding: 0 var(--gutter);
+}
+.prose p { margin: 0 0 1.4em; }
+.prose p:last-child { margin-bottom: 0; }
+.prose h1 {
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  margin: 0 0 2rem;
+}
+.prose h2 {
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 3rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+.prose h3 { font-size: 1rem; font-weight: 500; margin: 2rem 0 0.5rem; }
+.prose strong { font-weight: 600; color: var(--ink); }
+.prose em { color: var(--muted); font-style: italic; }
+.prose a { border-bottom: 1px solid var(--faint); }
+.prose a:hover { border-bottom-color: var(--ink); }
+.prose .lede { color: var(--muted); font-size: 1.0625rem; }
+
+/* description block on a work page */
+.work-text {
+  max-width: var(--measure);
+  margin: clamp(3rem, 8vh, 6rem) auto 0;
+  padding: 0 var(--gutter);
+  color: var(--muted);
+}
+.work-text p { margin: 0 0 1.3em; }
+
+/* install / room views */
+.views { margin-top: clamp(4rem, 10vh, 8rem); display: grid; gap: clamp(2rem, 5vh, 4rem); }
+.views figure { margin: 0; display: grid; gap: 0.9rem; justify-items: center; }
+.views figcaption { color: var(--faint); }
+
+/* prev / next */
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--rule);
+  margin: clamp(4rem, 10vh, 8rem) var(--gutter) 0;
+  padding-top: 1.25rem;
+}
+.pager a { color: var(--muted); transition: color 220ms ease; }
+.pager a:hover { color: var(--ink); }
+.pager span { color: var(--faint); }
+
+/* ------------------------------ contact ----------------------------- */
+
+.contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.75rem; }
+.contact-list dt { color: var(--faint); font-size: var(--micro); letter-spacing: var(--track); text-transform: uppercase; margin-bottom: 0.3rem; }
+.contact-list dd { margin: 0; font-size: 1.0625rem; }
+
+/* ------------------------------ footer ------------------------------ */
+
+footer {
+  margin-top: clamp(5rem, 14vh, 10rem);
+  padding: 2rem var(--gutter) 3rem;
+  border-top: 1px solid var(--rule);
+  color: var(--faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  justify-content: space-between;
+}
+footer a:hover { color: var(--ink); }
+
+/* --------------------------- reveal on scroll ------------------------ */
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity var(--fade), transform var(--fade); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .tile img { transition: none; }
+  .tile:hover img { transform: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ------------------------------ zoom view ---------------------------- */
+
+.zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  display: none;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+.zoom[open], .zoom.open { display: block; }
+.zoom:focus { outline: none; }   /* it is a focus target, not a control */
+
+.zoom-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+}
+.zoom-stage.dragging { cursor: grabbing; }
+
+.zoom-stage img {
+  position: absolute;
+  transform-origin: 0 0;
+  max-width: none;
+  will-change: transform;
+  image-rendering: high-quality;
+}
+
+.zoom-bar {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem var(--gutter);
+  color: var(--muted);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  pointer-events: none;
+}
+.zoom-bar > * { pointer-events: auto; }
+
+.zoom-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1.35rem var(--gutter);
+  color: var(--muted);
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.zoom-close:hover { color: var(--ink); }
+
+.zoom-status { color: var(--faint); }
+
+.zoom-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--faint);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+}
+
+/* keyboard focus, kept quiet but visible */
+:focus-visible { outline: 1px solid var(--muted); outline-offset: 3px; }
