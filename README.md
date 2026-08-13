@@ -164,29 +164,39 @@ everyone who doesn't.
 
 ## Deploying
 
-The build is plain static files. Any of these work; all of them serve the
-images untouched, which is the whole requirement.
+The build is plain static files. Deploy in two stages, so the new site can be
+seen and lived with before the domain moves. Nothing below affects
+meia-g.art until the final step.
 
-**Cloudflare Pages** — connect the repo, build command `npm run build:pages`,
-output directory `dist`. Free, fast, and unmetered bandwidth for images.
+### Stage one — get it on the internet
 
-**Netlify** — same, `netlify.toml` is not needed for a build this simple.
+**GitHub Pages** (the repo is already here, so this is the shortest path):
 
-**GitHub Pages** — serve `dist/` from the branch. `dist/CNAME` already contains
-`www.meia-g.art`.
+1. Merge this branch into `main`.
+2. Repo **Settings → Pages → Source: GitHub Actions**.
+3. The workflow in `.github/workflows/deploy.yml` runs on the next push to
+   `main` and publishes. It appears at
+   `https://meiadotwork.github.io/Meia-g/`.
 
-Use `build:pages` in CI rather than `build`: the masters are not in the repo, so
-CI must reuse the committed derivatives. Run the full `build` locally whenever
-images change, and commit the result.
+**Cloudflare Pages** is the better long-term home if the site gets traffic —
+connect the repo, build command `npm run build:pages`, output directory
+`dist`. Unmetered bandwidth, which matters when pages carry 2 MB of AVIF.
 
-### Pointing meia-g.art at it
+CI must run `build:pages`, never `build` — the masters are not in the repo, so
+there is nothing for CI to encode from. Run the full `build` locally whenever
+images change and commit `dist/`.
 
-The domain is currently registered through Squarespace and serving the
-Squarespace site. To move it, add the host's records at the registrar:
+### Stage two — move the domain
 
-- `CNAME` on `www` → the host's target (e.g. `<project>.pages.dev`)
-- apex `meia-g.art` → the host's apex record, then redirect apex to `www`
+Only once the site above looks right.
 
-Keep the Squarespace site up until DNS has propagated and the new site is
-verified — nothing here touches the existing one, and reverting is just
-switching the records back.
+1. Set `customDomain` in `data/site.json` to `"www.meia-g.art"`, rebuild, commit.
+   This writes `dist/CNAME`. It is deliberately off until now: with a CNAME
+   present, Pages serves *only* that domain and redirects the github.io URL to
+   it, so the preview would break while the domain still points at Squarespace.
+2. At the registrar, point `www` at the host (`meiadotwork.github.io` for
+   Pages, or `<project>.pages.dev` for Cloudflare), and the apex at the host's
+   apex records with a redirect to `www`.
+
+Squarespace keeps serving the site until DNS propagates, and reverting is
+just changing the records back.

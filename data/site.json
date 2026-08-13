@@ -7,6 +7,10 @@
   "email": "meiadotexpo@gmail.com",
   "instagram": { "art": "meia.expo", "tattoo": "meia.work" },
   "location": "New York",
+
+  "$customDomain": "Leave null until the domain is ready to move. Setting it writes dist/CNAME, at which point GitHub Pages serves only that domain and redirects the github.io preview URL to it — which looks broken while meia-g.art still points at Squarespace. Set to \"www.meia-g.art\" as the last step.",
+  "customDomain": null,
+
   "$hero": "The landing image, and the preview when the site is shared. A chrome work is used deliberately: an R-02 field on a black page can read as an image that failed to load, and previews as a black rectangle on Instagram or in a message. Change to any id in works.json.",
   "hero": "R-01-01",
 

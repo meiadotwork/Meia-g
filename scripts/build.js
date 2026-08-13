@@ -389,8 +389,12 @@ function copyStatic(built) {
       `\n</urlset>\n`
   );
 
-  // GitHub Pages custom domain. Harmless on other hosts.
-  write('CNAME', 'www.meia-g.art\n');
+  // GitHub Pages custom domain. Off by default and deliberately so: with a
+  // CNAME present, Pages serves the custom domain only and redirects the
+  // github.io URL to it. While meia-g.art still points at Squarespace that
+  // makes the new site look broken instead of previewable. Set customDomain
+  // in data/site.json once DNS is ready to switch.
+  if (site.customDomain) write('CNAME', site.customDomain + '\n');
 }
 
 /** What still needs Meia's input, so it is visible rather than silently absent. */
