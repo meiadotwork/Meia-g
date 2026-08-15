@@ -82,6 +82,9 @@ footer {
 
 /* ------------------------------ header ------------------------------ */
 
+/* Solid, with a rule under it — the masthead meia-g.art already had. The
+   old fade-to-transparent let a painting scroll up under the nav, so the
+   links landed on top of the work. */
 header {
   position: fixed;
   inset: 0 0 auto 0;
@@ -91,8 +94,8 @@ header {
   justify-content: space-between;
   padding: 0 var(--gutter);
   z-index: 60;
-  background: linear-gradient(to bottom, var(--ground) 55%, transparent);
-  mix-blend-mode: normal;
+  background: var(--ground);
+  border-bottom: 1px solid var(--rule);
 }
 
 .wordmark {
@@ -101,22 +104,24 @@ header {
   font-weight: 600;
 }
 
-nav { display: flex; gap: clamp(1rem, 2.5vw, 2.25rem); }
+/* Scoped to the masthead. A bare `nav` selector also caught .pager-rich,
+   and the mobile `width: 100%` below then pushed it past its own margins. */
+header nav { display: flex; gap: clamp(1rem, 2.5vw, 2.25rem); }
 
-nav a {
+header nav a {
   color: var(--muted);
   transition: color 260ms ease;
   padding-block: 0.5rem;
 }
-nav a:hover,
-nav a[aria-current="page"] { color: var(--ink); }
+header nav a:hover,
+header nav a[aria-current="page"] { color: var(--ink); }
 
 /* Mobile keeps all five items visible rather than hiding them behind a
    hamburger. They wrap onto a second line — a horizontally scrolling strip
    clipped "Contact" mid-word, which reads as breakage rather than design. */
 @media (max-width: 40rem) {
   header { height: auto; flex-direction: column; align-items: flex-start; gap: 0.4rem; padding-top: 1rem; padding-bottom: 0.75rem; }
-  nav { width: 100%; flex-wrap: wrap; gap: 0.5rem 1rem; }
+  header nav { width: 100%; flex-wrap: wrap; gap: 0.5rem 1rem; }
   :root { --head-h: 7rem; }
 }
 
@@ -303,6 +308,130 @@ main > .hero:first-child { padding-top: 0; }
 .views figure { margin: 0; display: grid; gap: 0.9rem; justify-items: center; }
 .views figcaption { color: var(--faint); }
 
+/* ---------------------- catalogue apparatus -------------------------
+   The typewriter face invites the register of a printed catalogue, so the
+   page carries the things a catalogue carries: a running head, a numbered
+   index, a metadata block per work, and a colophon. The numbering is real
+   information — these works are catalogued R-01-03 and so on, and the
+   position tells you where you are in a series.
+   ------------------------------------------------------------------- */
+
+.runhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: clamp(1rem, 2.5vh, 1.75rem) var(--gutter) 1rem;
+  margin-bottom: clamp(1.5rem, 4vh, 3rem);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.runhead .series { color: var(--muted); }
+.runhead .pos { font-variant-numeric: tabular-nums; }
+
+/* metadata, set as a catalogue entry rather than one grey line */
+.catalogue {
+  max-width: var(--measure);
+  margin: clamp(2rem, 6vh, 4rem) auto 0;
+  padding: 0 var(--gutter);
+}
+.catalogue dl { margin: 0; }
+.catalogue .row {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 0 1.5rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule);
+}
+.catalogue .row:last-child { border-bottom: 1px solid var(--rule); }
+.catalogue dt {
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.catalogue dd { margin: 0; font-size: 0.9375rem; }
+.catalogue dd.pending { color: var(--faint); font-style: italic; }
+@media (max-width: 40rem) {
+  .catalogue .row { grid-template-columns: 1fr; gap: 0.2rem; }
+}
+
+.section-head .count {
+  color: var(--faint);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+}
+
+/* landing masthead */
+.masthead {
+  padding: clamp(2rem, 7vh, 5rem) var(--gutter) 0;
+  display: grid;
+  gap: 1.25rem;
+  justify-items: center;
+  text-align: center;
+}
+.masthead h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.masthead .thesis {
+  margin: 0;
+  max-width: 54ch;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.masthead .rule {
+  width: min(9rem, 40vw);
+  height: 1px;
+  background: var(--rule);
+}
+
+/* prev / next carrying the neighbouring works, not just their names */
+.pager-rich {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  margin: clamp(4rem, 10vh, 8rem) var(--gutter) 0;
+  padding-top: 1.5rem;
+}
+.pager-rich a { display: flex; align-items: center; gap: 0.9rem; color: var(--muted); transition: color 220ms ease; }
+.pager-rich a:hover { color: var(--ink); }
+.pager-rich a.next { justify-self: end; flex-direction: row-reverse; text-align: right; }
+.pager-rich img { width: 56px; height: auto; box-shadow: 0 0 0 1px var(--rule); }
+.pager-rich .lab { font-size: var(--micro); letter-spacing: var(--track); text-transform: uppercase; display: grid; gap: 0.15rem; }
+.pager-rich .lab .dir { color: var(--faint); }
+.pager-rich .idx { justify-self: center; font-size: var(--micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+.pager-rich .idx:hover { color: var(--ink); }
+@media (max-width: 40rem) {
+  .pager-rich { grid-template-columns: 1fr; gap: 1rem; justify-items: start; }
+  .pager-rich a.next { justify-self: start; flex-direction: row; text-align: left; }
+}
+
+/* ruled CV rows */
+.prose h2 + p,
+.prose h3 { margin-top: 0.75rem; }
+
+/* colophon — a dl so dt/dd are legal, and the footer must not be a flex
+   container or this grid gets no width to distribute and stacks in one column */
+.colophon {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: 1.5rem 2rem;
+}
+.colophon .col { display: grid; gap: 0.3rem; align-content: start; }
+.colophon dt { color: var(--faint); }
+.colophon dd { margin: 0; }
+
 /* prev / next */
 .pager {
   display: flex;
@@ -328,11 +457,7 @@ footer {
   margin-top: clamp(5rem, 14vh, 10rem);
   padding: 2rem var(--gutter) 3rem;
   border-top: 1px solid var(--rule);
-  color: var(--faint);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 2rem;
-  justify-content: space-between;
+  color: var(--muted);
 }
 footer a:hover { color: var(--ink); }
 

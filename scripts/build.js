@@ -151,9 +151,12 @@ ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''
 ${body}
 </main>
 <footer>
-  <span>© ${new Date().getFullYear()} ${esc(site.name)}</span>
-  <span><a href="mailto:${site.email}">${site.email}</a></span>
-  <span><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">Instagram</a></span>
+  <dl class="colophon">
+    <div class="col"><dt>${esc(site.name)}</dt><dd>${esc(site.location)}</dd></div>
+    <div class="col"><dt>Enquiries</dt><dd><a href="mailto:${site.email}">${site.email}</a></dd></div>
+    <div class="col"><dt>Instagram</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
+    <div class="col"><dt>&copy; ${new Date().getFullYear()}</dt><dd>All works by the artist</dd></div>
+  </dl>
 </footer>
 <script src="/scripts/app.js" defer></script>
 </body>
@@ -163,6 +166,9 @@ ${body}
 
 /* -------------------------------------------------------------- page bodies */
 
+/** No sequence number here on purpose: the id (R-02-06) is already the
+ *  catalogue number, and the index runs newest-first, so a second count
+ *  would read "01" beside "R-02-06". */
 function tile(w, img) {
   const parts = captionParts(w);
   return `<a class="tile reveal" href="/work/${w.id}/">
@@ -176,6 +182,9 @@ function tile(w, img) {
 </a>`;
 }
 
+/** Zero-padded position, e.g. 03. Used for the catalogue index. */
+const pad = (n) => String(n).padStart(2, '0');
+
 function indexPage(m) {
   const hero = works.find((w) => w.id === site.hero) || works[0];
   const heroImg = m.works[hero.id] && m.works[hero.id].primary;
@@ -183,7 +192,17 @@ function indexPage(m) {
     .map((id) => works.find((w) => w.id === id))
     .filter((w) => w && m.works[w.id] && m.works[w.id].primary);
 
+  const counts = seriesList
+    .map((s) => ({ s, n: works.filter((w) => w.series === s.id && m.works[w.id] && m.works[w.id].primary).length }))
+    .filter((x) => x.n);
+
   const body = `
+<div class="masthead reveal in">
+  <h1>${esc(site.name)}</h1>
+  <span class="rule"></span>
+  <p class="thesis">${esc(site.description)}</p>
+</div>
+
 <section class="hero">
   <figure class="reveal in">
     ${picture(heroImg, {
@@ -191,13 +210,13 @@ function indexPage(m) {
       sizes: '(max-width: 60rem) 92vw, 60vw',
       priority: true,
     })}
-    <figcaption class="caption"><span class="id">${hero.id}</span></figcaption>
+    <figcaption class="caption"><span class="id">${hero.id}</span>${captionParts(hero).length ? `<span>${esc(captionParts(hero).join(', '))}</span>` : ''}</figcaption>
   </figure>
 </section>
 
 <section class="section">
   <div class="section-head">
-    <h2>${esc(site.tagline)}</h2>
+    <h2>${esc(site.tagline)} <span class="count">${counts.map((c) => `${c.s.id} — ${c.n}`).join(' · ')}</span></h2>
     <p>Meia rejects painting as image. These paintings do not depict; they operate. What appears is not an image but the result of a system in which visibility is produced, destabilized, and made contingent.</p>
   </div>
   <div class="grid">
@@ -223,9 +242,13 @@ function workIndexPage(m) {
       // links to a page that was never generated.
       const inSeries = works.filter((w) => w.series === s.id && m.works[w.id] && m.works[w.id].primary);
       if (!inSeries.length) return '';
+      const years = inSeries.map((w) => w.year).filter(Boolean);
+      const span = years.length
+        ? (Math.min(...years) === Math.max(...years) ? `${Math.min(...years)}` : `${Math.min(...years)}–${Math.max(...years)}`)
+        : null;
       return `<section class="section">
   <div class="section-head">
-    <h2>${esc(s.id)} · ${esc(s.title)}</h2>
+    <h2>${esc(s.id)} · ${esc(s.title)} <span class="count">${inSeries.length} work${inSeries.length === 1 ? '' : 's'}${span ? ` · ${span}` : ''}</span></h2>
     <p>${esc(s.note)}</p>
   </div>
   <div class="grid">
@@ -264,8 +287,41 @@ function workPage(w, m, prev, next) {
 
   const text = [w.description, w.text].filter(Boolean).join('\n\n');
 
+  const series = seriesList.find((s) => s.id === w.series) || {};
+  const siblings = works.filter((x) => x.series === w.series && m.works[x.id] && m.works[x.id].primary);
+  // Position comes from the work's own catalogue number, not its place in the
+  // display order. The index runs newest-first, which would otherwise label
+  // R-01-01 as "06 of 06" — contradicting the number printed beside it.
+  const own = Number((w.id.match(/(\d+)$/) || [])[1]);
+  const highest = Math.max(...siblings.map((x) => Number((x.id.match(/(\d+)$/) || [])[1]) || 0));
+  const position = Number.isFinite(own) ? own : siblings.findIndex((x) => x.id === w.id) + 1;
+
+  // A catalogue entry states its fields, including the ones not yet
+  // established — an empty row is honest and shows Meia what to fill in.
+  const rows = [
+    ['Series', `${w.series} · ${series.title || ''}`.trim()],
+    ['Medium', w.medium],
+    ['Dimensions', w.dimensions],
+    ['Year', w.year],
+    ['Reproduction', `${img.full.w} × ${img.height} px from the original file`],
+  ];
+
+  const thumb = (x, dir) => {
+    const t = m.works[x.id].primary;
+    const small = t.avif[0];
+    return `<a class="${dir}" href="/work/${x.id}/">
+      <img src="${small.src}" width="${small.w}" height="${Math.round(small.w / t.aspect)}" alt="" loading="lazy">
+      <span class="lab"><span class="dir">${dir === 'prev' ? 'Previous' : 'Next'}</span><span>${x.id}</span></span>
+    </a>`;
+  };
+
   const body = `
 <article>
+  <div class="runhead">
+    <span class="series">${esc(w.series)} · ${esc(series.title || '')}</span>
+    <span class="pos">${pad(position)} of ${pad(highest)}</span>
+  </div>
+
   <section class="plate">
     <figure class="plate-figure reveal in">
       <span data-zoom-src="${img.full.src}" data-zoom-w="${img.full.w}" data-zoom-h="${img.height}"
@@ -279,19 +335,25 @@ function workPage(w, m, prev, next) {
       <figcaption class="plate-caption">
         <span class="id">${w.id}</span>
         ${parts.length ? `<span class="meta" style="text-transform:none;letter-spacing:0">${esc(parts.join(', '))}</span>` : ''}
-        <span class="zoom-hint">Click to view at ${img.full.w} × ${img.height} px</span>
+        <span class="zoom-hint">Click to enlarge</span>
       </figcaption>
     </figure>
   </section>
 
   ${text ? `<div class="work-text reveal">${text.split('\n\n').map((p) => `<p>${esc(p)}</p>`).join('\n')}</div>` : ''}
 
+  <div class="catalogue reveal">
+    <dl>
+      ${rows.map(([k, v]) => `<div class="row"><dt>${k}</dt>${v ? `<dd>${esc(String(v))}</dd>` : '<dd class="pending">not yet recorded</dd>'}</div>`).join('\n      ')}
+    </dl>
+  </div>
+
   ${views ? `<section class="views section">\n  ${views}\n</section>` : ''}
 
-  <nav class="pager">
-    ${prev ? `<a href="/work/${prev.id}/">← ${prev.id}</a>` : '<span></span>'}
-    <a href="/work/">Index</a>
-    ${next ? `<a href="/work/${next.id}/">${next.id} →</a>` : '<span></span>'}
+  <nav class="pager-rich">
+    ${prev ? thumb(prev, 'prev') : '<span></span>'}
+    <a class="idx" href="/work/">Index</a>
+    ${next ? thumb(next, 'next') : '<span></span>'}
   </nav>
 </article>`;
 
