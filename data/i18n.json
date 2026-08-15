@@ -1,104 +1,219 @@
 {
   "$comment": "Interface strings, series text, and the medium/dimension lookups. Portuguese medium names and metric sizes are Meia's own, taken from meia-g_portfolio_2026_PT.pdf; Spanish is translated from those. English is the source language and lives inline in the templates' defaults.",
-
   "$languages": "Order here is the order of the switcher in the masthead.",
   "languages": [
-    { "code": "en", "label": "EN", "name": "English", "prefix": "" },
-    { "code": "pt", "label": "PT", "name": "Português", "prefix": "/pt" },
-    { "code": "es", "label": "ES", "name": "Español", "prefix": "/es" }
+    {
+      "code": "en",
+      "label": "EN",
+      "name": "English",
+      "prefix": ""
+    },
+    {
+      "code": "pt",
+      "label": "PT",
+      "name": "Português",
+      "prefix": "/pt"
+    },
+    {
+      "code": "es",
+      "label": "ES",
+      "name": "Español",
+      "prefix": "/es"
+    }
   ],
-
   "en": {
     "ui": {
-      "work": "Work", "refletismo": "Refletismo", "statement": "Statement", "bio": "Bio", "contact": "Contact",
-      "allWork": "All work", "index": "Index", "previous": "Previous", "next": "Next",
-      "installationView": "Installation view", "galleryView": "Gallery view",
-      "clickToEnlarge": "Click to enlarge", "of": "of",
-      "workOne": "work", "workMany": "works",
-      "series": "Series", "medium": "Medium", "dimensions": "Dimensions", "year": "Year",
-      "reproduction": "Reproduction", "fromOriginal": "px from the original file",
+      "work": "Work",
+      "refletismo": "Refletismo",
+      "statement": "Statement",
+      "bio": "Bio",
+      "contact": "Contact",
+      "allWork": "All work",
+      "index": "Index",
+      "previous": "Previous",
+      "next": "Next",
+      "installationView": "Installation view",
+      "galleryView": "Gallery view",
+      "clickToEnlarge": "Click to enlarge",
+      "of": "of",
+      "workOne": "work",
+      "workMany": "works",
+      "series": "Series",
+      "medium": "Medium",
+      "dimensions": "Dimensions",
+      "year": "Year",
+      "reproduction": "Reproduction",
+      "fromOriginal": "px from the original file",
       "notRecorded": "not yet recorded",
-      "enquiries": "Enquiries", "studio": "Studio", "instagram": "Instagram", "tattoo": "Tattoo",
+      "enquiries": "Enquiries",
+      "studio": "Studio",
+      "instagram": "Instagram",
+      "tattoo": "Tattoo",
       "contactNote": "For availability, price lists, or high-resolution files for press, please write. Works are photographed and catalogued at full resolution.",
       "allWorksBy": "All works by the artist",
-      "notFound": "Not found", "returnToWork": "Return to the work",
-      "viewerLoading": "Loading full resolution…", "viewerClose": "Close", "viewerActualSize": "actual size",
+      "notFound": "Not found",
+      "returnToWork": "Return to the work",
+      "viewerLoading": "Loading full resolution…",
+      "viewerClose": "Close",
+      "viewerActualSize": "actual size",
       "langLabel": "Language"
     },
     "tagline": "Refletismo",
     "description": "Meia G is a Brazilian-born artist working in New York. His paintings operate as spatial systems rather than images — chrome and controlled black grounds used to expose the instability of perception.",
     "landingNote": "Meia rejects painting as image. These paintings do not depict; they operate. What appears is not an image but the result of a system in which visibility is produced, destabilized, and made contingent.",
     "series": {
-      "R-02": { "title": "Fields", "note": "Constructed perceptual fields. No object, no focal point — depth produced entirely through repetition, compression and the behaviour of light across a black ground." },
-      "R-01": { "title": "Reflections", "note": "Chrome forms set against patterned black grounds. The surface carries no colour of its own; what appears is produced by everything around it." },
-      "R-00": { "title": "Origins", "note": "Early faceted studies on paper — the geometric logic the later work is built on." }
+      "R-02": {
+        "title": "Fields",
+        "note": "Constructed perceptual fields. No object, no focal point — depth produced entirely through repetition, compression and the behaviour of light across a black ground."
+      },
+      "R-01": {
+        "title": "Reflections",
+        "note": "Chrome forms set against patterned black grounds. The surface carries no colour of its own; what appears is produced by everything around it."
+      },
+      "R-00": {
+        "title": "Origins",
+        "note": "Early faceted studies on paper — the geometric logic the later work is built on."
+      }
     }
   },
-
   "pt": {
     "ui": {
-      "work": "Obra", "refletismo": "Refletismo", "statement": "Statement", "bio": "Bio", "contact": "Contato",
-      "allWork": "Ver todas as obras", "index": "Índice", "previous": "Anterior", "next": "Próxima",
-      "installationView": "Vista de montagem", "galleryView": "Vista da galeria",
-      "clickToEnlarge": "Clique para ampliar", "of": "de",
-      "workOne": "obra", "workMany": "obras",
-      "series": "Série", "medium": "Técnica", "dimensions": "Dimensões", "year": "Ano",
-      "reproduction": "Reprodução", "fromOriginal": "px a partir do arquivo original",
+      "work": "Obra",
+      "refletismo": "Refletismo",
+      "statement": "Statement",
+      "bio": "Bio",
+      "contact": "Contato",
+      "allWork": "Ver todas as obras",
+      "index": "Índice",
+      "previous": "Anterior",
+      "next": "Próxima",
+      "installationView": "Vista de montagem",
+      "galleryView": "Vista da galeria",
+      "clickToEnlarge": "Clique para ampliar",
+      "of": "de",
+      "workOne": "obra",
+      "workMany": "obras",
+      "series": "Série",
+      "medium": "Técnica",
+      "dimensions": "Dimensões",
+      "year": "Ano",
+      "reproduction": "Reprodução",
+      "fromOriginal": "px a partir do arquivo original",
       "notRecorded": "ainda não registrado",
-      "enquiries": "Contato", "studio": "Ateliê", "instagram": "Instagram", "tattoo": "Tatuagem",
+      "enquiries": "Contato",
+      "studio": "Ateliê",
+      "instagram": "Instagram",
+      "tattoo": "Tatuagem",
       "contactNote": "Para disponibilidade, lista de preços ou arquivos em alta resolução para imprensa, escreva. As obras são fotografadas e catalogadas em resolução integral.",
       "allWorksBy": "Todas as obras são do artista",
-      "notFound": "Página não encontrada", "returnToWork": "Voltar às obras",
-      "viewerLoading": "Carregando resolução integral…", "viewerClose": "Fechar", "viewerActualSize": "tamanho real",
+      "notFound": "Página não encontrada",
+      "returnToWork": "Voltar às obras",
+      "viewerLoading": "Carregando resolução integral…",
+      "viewerClose": "Fechar",
+      "viewerActualSize": "tamanho real",
       "langLabel": "Idioma"
     },
     "tagline": "Refletismo",
     "description": "Meia G é um artista brasileiro radicado em Nova York. Suas pinturas funcionam como sistemas espaciais, e não como imagens — cromo e fundos negros controlados usados para expor a instabilidade da percepção.",
     "landingNote": "Meia rejeita a pintura como imagem. Estas pinturas não representam: elas operam. O que aparece não é uma imagem, mas o resultado de um sistema no qual a visibilidade é produzida, desestabilizada e tornada contingente.",
     "series": {
-      "R-02": { "title": "Campos", "note": "Campos perceptivos construídos. Sem objeto, sem ponto focal — profundidade produzida inteiramente por repetição, compressão e pelo comportamento da luz sobre um fundo negro." },
-      "R-01": { "title": "Reflexos", "note": "Formas de cromo sobre fundos negros padronizados. A superfície não carrega cor própria; o que aparece é produzido por tudo o que está ao redor." },
-      "R-00": { "title": "Origens", "note": "Primeiros estudos facetados sobre papel — a lógica geométrica sobre a qual o trabalho posterior se constrói." }
+      "R-02": {
+        "title": "Campos",
+        "note": "Campos perceptivos construídos. Sem objeto, sem ponto focal — profundidade produzida inteiramente por repetição, compressão e pelo comportamento da luz sobre um fundo negro."
+      },
+      "R-01": {
+        "title": "Reflexos",
+        "note": "Formas de cromo sobre fundos negros padronizados. A superfície não carrega cor própria; o que aparece é produzido por tudo o que está ao redor."
+      },
+      "R-00": {
+        "title": "Origens",
+        "note": "Primeiros estudos facetados sobre papel — a lógica geométrica sobre a qual o trabalho posterior se constrói."
+      }
     }
   },
-
   "es": {
     "ui": {
-      "work": "Obra", "refletismo": "Refletismo", "statement": "Declaración", "bio": "Bio", "contact": "Contacto",
-      "allWork": "Ver todas las obras", "index": "Índice", "previous": "Anterior", "next": "Siguiente",
-      "installationView": "Vista de montaje", "galleryView": "Vista de la galería",
-      "clickToEnlarge": "Haz clic para ampliar", "of": "de",
-      "workOne": "obra", "workMany": "obras",
-      "series": "Serie", "medium": "Técnica", "dimensions": "Dimensiones", "year": "Año",
-      "reproduction": "Reproducción", "fromOriginal": "px a partir del archivo original",
+      "work": "Obra",
+      "refletismo": "Refletismo",
+      "statement": "Declaración",
+      "bio": "Bio",
+      "contact": "Contacto",
+      "allWork": "Ver todas las obras",
+      "index": "Índice",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "installationView": "Vista de montaje",
+      "galleryView": "Vista de la galería",
+      "clickToEnlarge": "Haz clic para ampliar",
+      "of": "de",
+      "workOne": "obra",
+      "workMany": "obras",
+      "series": "Serie",
+      "medium": "Técnica",
+      "dimensions": "Dimensiones",
+      "year": "Año",
+      "reproduction": "Reproducción",
+      "fromOriginal": "px a partir del archivo original",
       "notRecorded": "aún no registrado",
-      "enquiries": "Contacto", "studio": "Taller", "instagram": "Instagram", "tattoo": "Tatuaje",
+      "enquiries": "Contacto",
+      "studio": "Taller",
+      "instagram": "Instagram",
+      "tattoo": "Tatuaje",
       "contactNote": "Para disponibilidad, lista de precios o archivos en alta resolución para prensa, escriba. Las obras se fotografían y catalogan a resolución completa.",
       "allWorksBy": "Todas las obras son del artista",
-      "notFound": "Página no encontrada", "returnToWork": "Volver a las obras",
-      "viewerLoading": "Cargando resolución completa…", "viewerClose": "Cerrar", "viewerActualSize": "tamaño real",
+      "notFound": "Página no encontrada",
+      "returnToWork": "Volver a las obras",
+      "viewerLoading": "Cargando resolución completa…",
+      "viewerClose": "Cerrar",
+      "viewerActualSize": "tamaño real",
       "langLabel": "Idioma"
     },
     "tagline": "Refletismo",
     "description": "Meia G es un artista brasileño afincado en Nueva York. Sus pinturas funcionan como sistemas espaciales y no como imágenes — cromo y fondos negros controlados empleados para exponer la inestabilidad de la percepción.",
     "landingNote": "Meia rechaza la pintura como imagen. Estas pinturas no representan: operan. Lo que aparece no es una imagen, sino el resultado de un sistema en el que la visibilidad se produce, se desestabiliza y se vuelve contingente.",
     "series": {
-      "R-02": { "title": "Campos", "note": "Campos perceptivos construidos. Sin objeto, sin punto focal — profundidad producida enteramente por repetición, compresión y por el comportamiento de la luz sobre un fondo negro." },
-      "R-01": { "title": "Reflejos", "note": "Formas de cromo sobre fondos negros con patrón. La superficie no porta color propio; lo que aparece lo produce todo aquello que la rodea." },
-      "R-00": { "title": "Orígenes", "note": "Primeros estudios facetados sobre papel — la lógica geométrica sobre la que se construye la obra posterior." }
+      "R-02": {
+        "title": "Campos",
+        "note": "Campos perceptivos construidos. Sin objeto, sin punto focal — profundidad producida enteramente por repetición, compresión y por el comportamiento de la luz sobre un fondo negro."
+      },
+      "R-01": {
+        "title": "Reflejos",
+        "note": "Formas de cromo sobre fondos negros con patrón. La superficie no porta color propio; lo que aparece lo produce todo aquello que la rodea."
+      },
+      "R-00": {
+        "title": "Orígenes",
+        "note": "Primeros estudios facetados sobre papel — la lógica geométrica sobre la que se construye la obra posterior."
+      }
     }
   },
-
-  "$media": "Medium names as Meia writes them. Portuguese is verbatim from his own PT portfolio.",
+  "$media": "Medium names exactly as meia-g_portfolio2026.pdf prints them, including its lower-case 'canvas' and 'paper'.",
   "media": {
-    "Oil and Acrylic on Canvas": { "pt": "Óleo e acrílico sobre tela", "es": "Óleo y acrílico sobre lienzo" },
-    "Acrylic on Canvas": { "pt": "Acrílico sobre tela", "es": "Acrílico sobre lienzo" },
-    "Acrylic on Paper": { "pt": "Acrílico sobre papel", "es": "Acrílico sobre papel" }
+    "Oil and Acrylic on canvas": {
+      "pt": "Óleo e acrílico sobre tela",
+      "es": "Óleo y acrílico sobre lienzo"
+    },
+    "Acrylic on canvas": {
+      "pt": "Acrílico sobre tela",
+      "es": "Acrílico sobre lienzo"
+    },
+    "Acrylic on paper": {
+      "pt": "Acrílico sobre papel",
+      "es": "Acrílico sobre papel"
+    }
   },
-
-  "$dimensions": "Imperial for English, metric for Portuguese and Spanish — the same values Meia's own PT portfolio prints.",
+  "$dimensions": "Imperial as the portfolio prints it; metric conversions for PT and ES. 35 in = 89 cm, which is what Meia's own PT portfolio prints for R-00-01.",
   "dimensions": {
-    "30 × 40 in": { "pt": "76 × 101 cm", "es": "76 × 101 cm" },
-    "34 × 34 in": { "pt": "86 × 86 cm", "es": "86 × 86 cm" }
+    "30 × 40 in": {
+      "pt": "76 × 101 cm",
+      "es": "76 × 101 cm"
+    },
+    "35 × 35 in": {
+      "pt": "89 × 89 cm",
+      "es": "89 × 89 cm"
+    },
+    "30 × 30 in": {
+      "pt": "76 × 76 cm",
+      "es": "76 × 76 cm"
+    }
   }
 }
