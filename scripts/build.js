@@ -220,10 +220,6 @@ function indexPage(L, m) {
   const heroImg = m.works[hero.id] && m.works[hero.id].primary;
   const selected = (site.selected || []).map((id) => works.find((w) => w.id === id))
     .filter((w) => w && m.works[w.id] && m.works[w.id].primary);
-  const counts = Object.keys(L.series)
-    .map((id) => ({ id, n: works.filter((w) => w.series === id && m.works[w.id] && m.works[w.id].primary).length }))
-    .filter((c) => c.n);
-
   const body = `
 <div class="masthead reveal in">
   <h1>${esc(site.name)}</h1>
@@ -239,7 +235,7 @@ function indexPage(L, m) {
 
 <section class="section">
   <div class="section-head">
-    <h2>${esc(L.tagline)} <span class="count">${counts.map((c) => `${c.id} — ${c.n}`).join(' · ')}</span></h2>
+    <h2>${esc(L.tagline)}</h2>
   </div>
   <div class="grid">
     ${selected.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
@@ -262,7 +258,7 @@ function workIndexPage(L, m) {
     const n = inSeries.length;
     return `<section class="section">
   <div class="section-head">
-    <h2>${esc(id)} <span class="count">${n} ${esc(n === 1 ? L.t.workOne : L.t.workMany)}${span ? ` · ${span}` : ''}</span></h2>
+    <h2>${esc(id)}${span ? ` <span class="count">${span}</span>` : ''}</h2>
   </div>
   <div class="grid">
     ${inSeries.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}

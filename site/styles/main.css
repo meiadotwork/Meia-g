@@ -192,19 +192,18 @@ main > .hero:first-child { padding-top: 0; }
 
 .section { padding: clamp(4rem, 11vh, 9rem) var(--gutter); }
 
+/* Centred, and a step up in size — it is the only thing standing between one
+   series and the next now that the notes are gone. */
 .section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 2rem;
   border-top: 1px solid var(--rule);
-  padding-top: 1.1rem;
+  padding-top: 1.4rem;
   margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+  text-align: center;
 }
 
 .section-head h2 {
-  font-size: var(--micro);
-  letter-spacing: var(--track);
+  font-size: 0.9375rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 500;
   margin: 0;
@@ -386,6 +385,7 @@ main > .hero:first-child { padding-top: 0; }
   color: var(--faint);
   font-size: var(--micro);
   letter-spacing: var(--track);
+  margin-left: 0.5rem;
 }
 
 /* landing masthead */
