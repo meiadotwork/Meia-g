@@ -5,23 +5,41 @@
   "tagline": "Refletismo",
   "description": "Meia G is a Brazilian-born artist working in New York. His paintings operate as spatial systems rather than images — chrome and controlled black grounds used to expose the instability of perception.",
   "email": "meiadotexpo@gmail.com",
-  "instagram": { "art": "meia.expo", "tattoo": "meia.work" },
+  "instagram": {
+    "art": "meia.expo",
+    "tattoo": "meia.work"
+  },
   "location": "New York",
-
   "$customDomain": "Leave null until the domain is ready to move. Setting it writes dist/CNAME, at which point GitHub Pages serves only that domain and redirects the github.io preview URL to it — which looks broken while meia-g.art still points at Squarespace. Set to \"www.meia-g.art\" as the last step.",
   "customDomain": null,
-
-  "$hero": "The landing image, and the preview when the site is shared. A chrome work is used deliberately: an R-02 field on a black page can read as an image that failed to load, and previews as a black rectangle on Instagram or in a message. Change to any id in works.json.",
-  "hero": "R-01-01",
-
-  "$selected": "The landing sequence. Alternates chrome and field so the page has a rhythm rather than six near-identical black rectangles.",
-  "selected": ["R-02-06", "R-01-05", "R-02-03", "R-01-03", "R-02-04", "R-01-06"],
-
+  "$hero": "The painting the landing page opens with — R-01-06, the same one meia-g.art uses.",
+  "hero": "R-01-06",
   "nav": [
-    { "label": "Work", "href": "/work/" },
-    { "label": "Refletismo", "href": "/refletismo/" },
-    { "label": "Statement", "href": "/statement/" },
-    { "label": "Bio", "href": "/bio/" },
-    { "label": "Contact", "href": "/contact/" }
-  ]
+    {
+      "label": "Work",
+      "href": "/work/"
+    },
+    {
+      "label": "Refletismo",
+      "href": "/refletismo/"
+    },
+    {
+      "label": "Statement",
+      "href": "/statement/"
+    },
+    {
+      "label": "Bio",
+      "href": "/bio/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "$seriesCovers": "Cover image per series on the Work index, matching the covers meia-g.art uses for its three projects.",
+  "seriesCovers": {
+    "R-02": "R-02-01",
+    "R-01": "R-01-01",
+    "R-00": "R-00-01"
+  }
 }

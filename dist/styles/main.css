@@ -219,6 +219,45 @@ main > .hero:first-child { padding-top: 0; }
   letter-spacing: 0;
 }
 
+/* --------------------------- series index ---------------------------
+   Work opens as three names. Each card is a cover and a name; the
+   paintings are one level in. */
+
+.series-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  /* Bottom-aligned so the three names sit on one line. R-00 is square and
+     the others portrait, and cropping a painting to match is not an option. */
+  align-items: end;
+}
+
+.series-card { display: block; text-align: center; }
+
+.series-frame {
+  display: block;
+  overflow: hidden;
+  background: var(--ground-lift);
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.series-frame img { width: 100%; transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.series-card:hover .series-frame img { transform: scale(1.012); }
+
+.series-name {
+  display: block;
+  margin-top: 1.1rem;
+  font-size: 0.9375rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.series-name .count { color: var(--faint); font-size: var(--micro); letter-spacing: var(--track); margin-left: 0.4rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .series-frame img { transition: none; }
+  .series-card:hover .series-frame img { transform: none; }
+}
+
 /* ------------------------------ work grid --------------------------- */
 
 .grid {

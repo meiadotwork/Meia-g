@@ -188,13 +188,6 @@ ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''
 <main>
 ${body}
 </main>
-<footer>
-  <dl class="colophon">
-    <div class="col"><dt>${esc(site.name)}</dt><dd>${esc(site.location)}</dd></div>
-    <div class="col"><dt>${esc(L.t.instagram)}</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
-    <div class="col"><dt>&copy; ${new Date().getFullYear()}</dt><dd>${esc(site.name)}</dd></div>
-  </dl>
-</footer>
 <script src="/scripts/app.js" defer></script>
 </body>
 </html>
@@ -218,14 +211,10 @@ function tile(L, w, img) {
 function indexPage(L, m) {
   const hero = works.find((w) => w.id === site.hero) || works[0];
   const heroImg = m.works[hero.id] && m.works[hero.id].primary;
-  const selected = (site.selected || []).map((id) => works.find((w) => w.id === id))
-    .filter((w) => w && m.works[w.id] && m.works[w.id].primary);
-  const body = `
-<div class="masthead reveal in">
-  <h1>${esc(site.name)}</h1>
-  <span class="rule"></span>
-</div>
+  const st = L.content.statement;
 
+  // What meia-g.art opens with: one painting, then the statement. Nothing else.
+  const body = `
 <section class="hero">
   <figure class="reveal in">
     ${picture(heroImg, { alt: wtx(L, hero, 'alt') || hero.id, sizes: '(max-width: 60rem) 92vw, 60vw', priority: true })}
@@ -234,13 +223,10 @@ function indexPage(L, m) {
 </section>
 
 <section class="section">
-  <div class="section-head">
-    <h2>${esc(L.tagline)}</h2>
+  <div class="prose reveal">
+    <h1>${esc(st.title || '')}</h1>
+    ${st.html}
   </div>
-  <div class="grid">
-    ${selected.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
-  </div>
-  <p class="prose" style="margin-top:clamp(3rem,8vh,6rem)"><a href="${url(L, '/work/')}">${esc(L.t.allWork)} &rarr;</a></p>
 </section>`;
 
   return layout(L, {
@@ -249,27 +235,46 @@ function indexPage(L, m) {
   });
 }
 
+/** Work is an index of series, as it is on meia-g.art — the paintings live
+ *  one level down, so the page opens as three names rather than fourteen
+ *  images. */
 function workIndexPage(L, m) {
-  const sections = Object.entries(L.series).map(([id, s]) => {
-    const inSeries = works.filter((w) => w.series === id && m.works[w.id] && m.works[w.id].primary);
-    if (!inSeries.length) return '';
-    const years = inSeries.map((w) => w.year).filter(Boolean);
+  const covers = site.seriesCovers || {};
+  const entries = Object.keys(L.series)
+    .map((id) => ({ id, list: works.filter((w) => w.series === id && m.works[w.id] && m.works[w.id].primary) }))
+    .filter((e) => e.list.length);
+
+  const body = `<section class="section series-index">
+  ${entries.map((e) => {
+    const coverId = covers[e.id] && m.works[covers[e.id]] ? covers[e.id] : e.list[0].id;
+    const years = e.list.map((w) => w.year).filter(Boolean);
     const span = years.length ? (Math.min(...years) === Math.max(...years) ? `${Math.min(...years)}` : `${Math.min(...years)}–${Math.max(...years)}`) : null;
-    const n = inSeries.length;
-    return `<section class="section">
+    return `<a class="series-card reveal" href="${url(L, `/work/${e.id}/`)}">
+    <span class="series-frame">${picture(m.works[coverId].primary, { alt: e.id, sizes: '(max-width: 40rem) 100vw, (max-width: 80rem) 50vw, 33vw' })}</span>
+    <span class="series-name">${esc(e.id)}${span ? ` <span class="count">${span}</span>` : ''}</span>
+  </a>`;
+  }).join('\n  ')}
+</section>`;
+
+  return layout(L, { title: `${L.t.work} — ${site.name}`, description: L.description, body, current: '/work/', route: '/work/' });
+}
+
+/** One series, its paintings. */
+function seriesPage(L, id, m) {
+  const list = works.filter((w) => w.series === id && m.works[w.id] && m.works[w.id].primary);
+  const years = list.map((w) => w.year).filter(Boolean);
+  const span = years.length ? (Math.min(...years) === Math.max(...years) ? `${Math.min(...years)}` : `${Math.min(...years)}–${Math.max(...years)}`) : null;
+
+  const body = `<section class="section">
   <div class="section-head">
     <h2>${esc(id)}${span ? ` <span class="count">${span}</span>` : ''}</h2>
   </div>
   <div class="grid">
-    ${inSeries.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
+    ${list.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
   </div>
 </section>`;
-  }).join('\n');
 
-  return layout(L, {
-    title: `${L.t.work} — ${site.name}`, description: L.description, body: sections,
-    current: '/work/', route: '/work/',
-  });
+  return layout(L, { title: `${id} — ${site.name}`, description: L.description, body, current: '/work/', route: `/work/${id}/` });
 }
 
 function workPage(L, w, m, prev, next) {
@@ -321,7 +326,7 @@ function workPage(L, w, m, prev, next) {
 
   <nav class="pager-rich">
     ${prev ? thumb(prev, 'prev') : '<span></span>'}
-    <a class="idx" href="${url(L, '/work/')}">${esc(L.t.index)}</a>
+    <a class="idx" href="${url(L, `/work/${w.series}/`)}">${esc(L.t.index)}</a>
     ${next ? thumb(next, 'next') : '<span></span>'}
   </nav>
 </article>`;
@@ -394,7 +399,10 @@ function copyStatic(built) {
   write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#ffffff"/><rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="#dedad2"/><text x="16" y="22" font-family="American Typewriter,Courier New,Courier,monospace" font-size="16" fill="#111110" text-anchor="middle">M</text></svg>`);
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`);
 
-  const routes = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/'].concat(built.map((w) => `/work/${w.id}/`));
+  const seriesIds = [...new Set(built.map((w) => w.series))];
+  const routes = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/']
+    .concat(seriesIds.map((id) => `/work/${id}/`))
+    .concat(built.map((w) => `/work/${w.id}/`));
   const urls = [];
   for (const r of routes) {
     const alts = LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${l.code}" href="${site.domain}${l.prefix}${r}"/>`).join('\n');
@@ -438,7 +446,12 @@ function gapsReport() {
     const p = L.prefix;
     write(`${p}/index.html`.replace(/^\//, ''), indexPage(L, manifest));
     write(`${p}/work/index.html`.replace(/^\//, ''), workIndexPage(L, manifest));
-    present.forEach((w, i) => write(`${p}/work/${w.id}/index.html`.replace(/^\//, ''), workPage(L, w, manifest, present[i - 1], present[i + 1])));
+    for (const id of Object.keys(L.series)) {
+      const list = present.filter((w) => w.series === id);
+      if (!list.length) continue;
+      write(`${p}/work/${id}/index.html`.replace(/^\//, ''), seriesPage(L, id, manifest));
+      list.forEach((w, i) => write(`${p}/work/${w.id}/index.html`.replace(/^\//, ''), workPage(L, w, manifest, list[i - 1], list[i + 1])));
+    }
     write(`${p}/refletismo/index.html`.replace(/^\//, ''), prosePage(L, { key: 'refletismo', route: '/refletismo/', current: '/refletismo/' }));
     write(`${p}/statement/index.html`.replace(/^\//, ''), prosePage(L, { key: 'statement', route: '/statement/', current: '/statement/' }));
     write(`${p}/bio/index.html`.replace(/^\//, ''), bioPage(L));
