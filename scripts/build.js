@@ -4,10 +4,16 @@
  *
  *   node scripts/build.js            full build (images + pages)
  *   node scripts/build.js --pages    pages only, reuse existing derivatives
+ *   node scripts/build.js --force    re-encode every image from the masters
  *
  * Masters are read from ./masters (override with MASTERS_DIR). They are not in
  * the repository — they are 1.3 GB of camera files. The derivatives in
  * dist/img are, because those are the website.
+ *
+ * The site is built once per language into its own tree (/, /pt, /es) off a
+ * single set of images. Translations live in data/i18n.json, data/works.<lang>.json
+ * and content/<lang>/; anything untranslated falls back to English rather than
+ * rendering blank.
  */
 
 const fs = require('fs');
@@ -23,18 +29,43 @@ const PAGES_ONLY = process.argv.includes('--pages');
 
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'site.json'), 'utf8'));
 const cat = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'works.json'), 'utf8'));
+const i18n = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'i18n.json'), 'utf8'));
 const works = cat.works;
-const seriesList = cat.series;
+const LANGS = i18n.languages;
 
-const content = {};
-for (const f of fs.readdirSync(path.join(ROOT, 'content'))) {
-  if (f.endsWith('.md')) content[f.replace(/\.md$/, '')] = render(fs.readFileSync(path.join(ROOT, 'content', f), 'utf8'));
+/** Per-language content and work-text, with English underneath as fallback. */
+function loadLang(code) {
+  const dir = path.join(ROOT, 'content', code);
+  const content = {};
+  if (fs.existsSync(dir)) {
+    for (const f of fs.readdirSync(dir)) {
+      if (f.endsWith('.md')) content[f.replace(/\.md$/, '')] = render(fs.readFileSync(path.join(dir, f), 'utf8'));
+    }
+  }
+  const wtPath = path.join(ROOT, 'data', `works.${code}.json`);
+  const wt = fs.existsSync(wtPath) ? JSON.parse(fs.readFileSync(wtPath, 'utf8')) : {};
+  return { content, wt };
 }
+
+const EN = loadLang('en');
+
+const CONTEXTS = LANGS.map((l) => {
+  const { content, wt } = l.code === 'en' ? EN : loadLang(l.code);
+  const pack = i18n[l.code] || i18n.en;
+  return {
+    ...l,
+    t: { ...i18n.en.ui, ...(pack.ui || {}) },
+    series: pack.series || i18n.en.series,
+    tagline: pack.tagline || i18n.en.tagline,
+    description: pack.description || i18n.en.description,
+    landingNote: pack.landingNote || i18n.en.landingNote,
+    content: { ...EN.content, ...content },
+    wt,
+  };
+});
 
 /* ------------------------------------------------------------------ images */
 
-/** True when every file a manifest entry claims is actually on disk, so a
- *  re-run can skip work that is already encoded. */
 function entryIntact(entry) {
   if (!entry) return false;
   const files = entry.avif.concat(entry.jpeg, entry.full ? [entry.full] : []);
@@ -42,9 +73,6 @@ function entryIntact(entry) {
 }
 
 async function buildImages() {
-  // Re-encoding fourteen 16MP masters takes the better part of an hour, and
-  // adding one painting should not cost that. Anything already on disk is
-  // reused unless --force says otherwise.
   const force = process.argv.includes('--force');
   const previous = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : { works: {} };
   const manifest = { works: {} };
@@ -61,10 +89,7 @@ async function buildImages() {
     for (const [role, rel] of [['primary', w.master], ['install', w.install], ['room', w.room]]) {
       if (!rel) continue;
       const srcFile = path.join(MASTERS, rel);
-      if (!fs.existsSync(srcFile)) {
-        console.warn(`    ! missing ${role}: ${rel}`);
-        continue;
-      }
+      if (!fs.existsSync(srcFile)) { console.warn(`    ! missing ${role}: ${rel}`); continue; }
 
       const cached = previous.works[w.id] && previous.works[w.id][role];
       if (!force && entryIntact(cached) && cached.source === path.basename(rel)) {
@@ -72,19 +97,12 @@ async function buildImages() {
         manifest.works[w.id][role] = cached;
         continue;
       }
-
       console.log(`    ${role}  <- ${rel}`);
       manifest.works[w.id][role] = await buildImage({
-        srcFile,
-        outDir: path.join(DIST, 'img', w.id),
-        slug: `${w.id}-${role}`,
-        publicPath: `/img/${w.id}`,
-        zoomable: role === 'primary',
-        log: console.log,
+        srcFile, outDir: path.join(DIST, 'img', w.id), slug: `${w.id}-${role}`,
+        publicPath: `/img/${w.id}`, zoomable: role === 'primary', log: console.log,
       });
     }
-    // Written after every work, not at the end: a long build that is
-    // interrupted keeps everything it has already done.
     fs.writeFileSync(MANIFEST, JSON.stringify(manifest, null, 2));
   }
   return manifest;
@@ -93,12 +111,9 @@ async function buildImages() {
 /* --------------------------------------------------------------- templates */
 
 const srcset = (list) => list.map((v) => `${v.src} ${v.w}w`).join(', ');
+const pad = (n) => String(n).padStart(2, '0');
 
-/**
- * A <picture> with AVIF first and a JPEG fallback. The LQIP sits behind as a
- * background so a black painting never arrives on a white flash.
- */
-function picture(img, { alt, sizes, className = '', loading = 'lazy', priority = false, style = '' }) {
+function picture(img, { alt, sizes, className = '', loading = 'lazy', priority = false }) {
   if (!img) return '';
   const jpegFallback = img.jpeg[img.jpeg.length - 1];
   return `<picture>
@@ -106,35 +121,54 @@ function picture(img, { alt, sizes, className = '', loading = 'lazy', priority =
   <img src="${jpegFallback.src}" srcset="${srcset(img.jpeg)}" sizes="${sizes}"
        width="${img.width}" height="${img.height}" alt="${esc(alt || '')}"
        class="${className}" ${priority ? 'fetchpriority="high"' : `loading="${loading}"`} decoding="async"
-       style="background-image:url(${img.lqip});background-size:cover;${style}">
+       style="background-image:url(${img.lqip});background-size:cover;">
 </picture>`;
 }
 
-/** "R-01-01, Oil and acrylic on canvas, 30 × 40 in, 2025" — omitting whatever
- *  is not yet known rather than printing a placeholder. */
-function captionParts(w) {
-  return [w.medium, w.dimensions, w.year].filter(Boolean);
-}
+/** Localised field access — falls back to the English entry when a
+ *  translation is absent, so a page is never blank for want of one. */
+const wtx = (L, w, field) => (L.wt[w.id] && L.wt[w.id][field]) || w[field] || null;
+const medium = (L, w) => (w.medium && i18n.media[w.medium] && i18n.media[w.medium][L.code]) || w.medium;
+const dims = (L, w) => (w.dimensions && i18n.dimensions[w.dimensions] && i18n.dimensions[w.dimensions][L.code]) || w.dimensions;
+const captionParts = (L, w) => [medium(L, w), dims(L, w), w.year].filter(Boolean);
+const url = (L, route) => `${L.prefix}${route}`;
 
-function layout({ title, description, body, current, ogImage, canonical }) {
-  const nav = site.nav
-    .map((n) => `<a href="${n.href}"${current === n.href ? ' aria-current="page"' : ''}>${n.label}</a>`)
-    .join('\n      ');
+/** `switcherRoute` exists for the 404: it is a single root page, so the
+ *  language links must point at each language's home rather than at
+ *  /pt/404.html, which is never generated. */
+function layout(L, { title, description, body, current, ogImage, route, switcherRoute }) {
+  const alt = switcherRoute || route;
+  const nav = [
+    ['/work/', L.t.work], ['/refletismo/', L.t.refletismo], ['/statement/', L.t.statement],
+    ['/bio/', L.t.bio], ['/contact/', L.t.contact],
+  ].map(([r, label]) => `<a href="${url(L, r)}"${current === r ? ' aria-current="page"' : ''}>${esc(label)}</a>`).join('\n      ');
+
+  // Same page, other language.
+  const switcher = LANGS.map((l) =>
+    l.code === L.code
+      ? `<span class="on" aria-current="true">${l.label}</span>`
+      : `<a href="${l.prefix}${alt}" hreflang="${l.code}" lang="${l.code}" title="${esc(l.name)}">${l.label}</a>`
+  ).join('');
+
+  const alternates = LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${site.domain}${l.prefix}${alt}">`).join('\n');
 
   return `<!doctype html>
-<html lang="en">
+<html lang="${L.code}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${site.domain}${canonical}">
+<link rel="canonical" href="${site.domain}${url(L, route)}">
+${alternates}
+<link rel="alternate" hreflang="x-default" href="${site.domain}${alt}">
 <meta name="theme-color" content="${site.themeColor || '#ffffff'}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${site.domain}${canonical}">
+<meta property="og:locale" content="${L.code}">
+<meta property="og:url" content="${site.domain}${url(L, route)}">
 ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''}
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/styles/main.css">
@@ -142,10 +176,13 @@ ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''
 </head>
 <body>
 <header>
-  <a class="wordmark" href="/">${esc(site.wordmark)}</a>
-  <nav>
+  <a class="wordmark" href="${url(L, '/')}">${esc(site.wordmark)}</a>
+  <div class="head-right">
+    <nav>
       ${nav}
-  </nav>
+    </nav>
+    <div class="langs" role="group" aria-label="${esc(L.t.langLabel)}">${switcher}</div>
+  </div>
 </header>
 <main>
 ${body}
@@ -153,9 +190,8 @@ ${body}
 <footer>
   <dl class="colophon">
     <div class="col"><dt>${esc(site.name)}</dt><dd>${esc(site.location)}</dd></div>
-    <div class="col"><dt>Enquiries</dt><dd><a href="mailto:${site.email}">${site.email}</a></dd></div>
-    <div class="col"><dt>Instagram</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
-    <div class="col"><dt>&copy; ${new Date().getFullYear()}</dt><dd>All works by the artist</dd></div>
+    <div class="col"><dt>${esc(L.t.instagram)}</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
+    <div class="col"><dt>&copy; ${new Date().getFullYear()}</dt><dd>${esc(L.t.allWorksBy)}</dd></div>
   </dl>
 </footer>
 <script src="/scripts/app.js" defer></script>
@@ -166,176 +202,132 @@ ${body}
 
 /* -------------------------------------------------------------- page bodies */
 
-/** No sequence number here on purpose: the id (R-02-06) is already the
- *  catalogue number, and the index runs newest-first, so a second count
- *  would read "01" beside "R-02-06". */
-function tile(w, img) {
-  const parts = captionParts(w);
-  return `<a class="tile reveal" href="/work/${w.id}/">
+/** No sequence number: the id (R-02-06) is already the catalogue number, and
+ *  the index runs newest-first, so a second count would read "01" beside it. */
+function tile(L, w, img) {
+  const parts = captionParts(L, w);
+  return `<a class="tile reveal" href="${url(L, `/work/${w.id}/`)}">
   <span class="tile-frame">
-    ${picture(img, {
-      alt: w.alt || `${w.id}, painting by ${site.name}`,
-      sizes: '(max-width: 40rem) 100vw, (max-width: 80rem) 50vw, 33vw',
-    })}
+    ${picture(img, { alt: wtx(L, w, 'alt') || `${w.id}, ${site.name}`, sizes: '(max-width: 40rem) 100vw, (max-width: 80rem) 50vw, 33vw' })}
   </span>
   <span class="caption"><span class="id">${w.id}</span>${parts.length ? `<span>${esc(parts.join(', '))}</span>` : ''}</span>
 </a>`;
 }
 
-/** Zero-padded position, e.g. 03. Used for the catalogue index. */
-const pad = (n) => String(n).padStart(2, '0');
-
-function indexPage(m) {
+function indexPage(L, m) {
   const hero = works.find((w) => w.id === site.hero) || works[0];
   const heroImg = m.works[hero.id] && m.works[hero.id].primary;
-  const selected = (site.selected || [])
-    .map((id) => works.find((w) => w.id === id))
+  const selected = (site.selected || []).map((id) => works.find((w) => w.id === id))
     .filter((w) => w && m.works[w.id] && m.works[w.id].primary);
-
-  const counts = seriesList
-    .map((s) => ({ s, n: works.filter((w) => w.series === s.id && m.works[w.id] && m.works[w.id].primary).length }))
-    .filter((x) => x.n);
+  const counts = Object.keys(L.series)
+    .map((id) => ({ id, n: works.filter((w) => w.series === id && m.works[w.id] && m.works[w.id].primary).length }))
+    .filter((c) => c.n);
 
   const body = `
 <div class="masthead reveal in">
   <h1>${esc(site.name)}</h1>
   <span class="rule"></span>
-  <p class="thesis">${esc(site.description)}</p>
+  <p class="thesis">${esc(L.description)}</p>
 </div>
 
 <section class="hero">
   <figure class="reveal in">
-    ${picture(heroImg, {
-      alt: hero.alt || `${hero.id}, painting by ${site.name}`,
-      sizes: '(max-width: 60rem) 92vw, 60vw',
-      priority: true,
-    })}
-    <figcaption class="caption"><span class="id">${hero.id}</span>${captionParts(hero).length ? `<span>${esc(captionParts(hero).join(', '))}</span>` : ''}</figcaption>
+    ${picture(heroImg, { alt: wtx(L, hero, 'alt') || hero.id, sizes: '(max-width: 60rem) 92vw, 60vw', priority: true })}
+    <figcaption class="caption"><span class="id">${hero.id}</span>${captionParts(L, hero).length ? `<span>${esc(captionParts(L, hero).join(', '))}</span>` : ''}</figcaption>
   </figure>
 </section>
 
 <section class="section">
   <div class="section-head">
-    <h2>${esc(site.tagline)} <span class="count">${counts.map((c) => `${c.s.id} — ${c.n}`).join(' · ')}</span></h2>
-    <p>Meia rejects painting as image. These paintings do not depict; they operate. What appears is not an image but the result of a system in which visibility is produced, destabilized, and made contingent.</p>
+    <h2>${esc(L.tagline)} <span class="count">${counts.map((c) => `${c.id} — ${c.n}`).join(' · ')}</span></h2>
+    <p>${esc(L.landingNote)}</p>
   </div>
   <div class="grid">
-    ${selected.map((w) => tile(w, m.works[w.id] && m.works[w.id].primary)).join('\n    ')}
+    ${selected.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
   </div>
-  <p class="prose" style="margin-top:clamp(3rem,8vh,6rem)"><a href="/work/">All work →</a></p>
+  <p class="prose" style="margin-top:clamp(3rem,8vh,6rem)"><a href="${url(L, '/work/')}">${esc(L.t.allWork)} &rarr;</a></p>
 </section>`;
 
-  return layout({
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    body,
-    current: '/',
-    canonical: '/',
-    ogImage: heroImg && heroImg.jpeg[heroImg.jpeg.length - 1].src,
+  return layout(L, {
+    title: `${site.name} — ${L.tagline}`, description: L.description, body,
+    current: '/', route: '/', ogImage: heroImg && heroImg.jpeg[heroImg.jpeg.length - 1].src,
   });
 }
 
-function workIndexPage(m) {
-  const sections = seriesList
-    .map((s) => {
-      // Only works that actually have a built image — otherwise the index
-      // links to a page that was never generated.
-      const inSeries = works.filter((w) => w.series === s.id && m.works[w.id] && m.works[w.id].primary);
-      if (!inSeries.length) return '';
-      const years = inSeries.map((w) => w.year).filter(Boolean);
-      const span = years.length
-        ? (Math.min(...years) === Math.max(...years) ? `${Math.min(...years)}` : `${Math.min(...years)}–${Math.max(...years)}`)
-        : null;
-      return `<section class="section">
+function workIndexPage(L, m) {
+  const sections = Object.entries(L.series).map(([id, s]) => {
+    const inSeries = works.filter((w) => w.series === id && m.works[w.id] && m.works[w.id].primary);
+    if (!inSeries.length) return '';
+    const years = inSeries.map((w) => w.year).filter(Boolean);
+    const span = years.length ? (Math.min(...years) === Math.max(...years) ? `${Math.min(...years)}` : `${Math.min(...years)}–${Math.max(...years)}`) : null;
+    const n = inSeries.length;
+    return `<section class="section">
   <div class="section-head">
-    <h2>${esc(s.id)} · ${esc(s.title)} <span class="count">${inSeries.length} work${inSeries.length === 1 ? '' : 's'}${span ? ` · ${span}` : ''}</span></h2>
+    <h2>${esc(id)} · ${esc(s.title)} <span class="count">${n} ${esc(n === 1 ? L.t.workOne : L.t.workMany)}${span ? ` · ${span}` : ''}</span></h2>
     <p>${esc(s.note)}</p>
   </div>
   <div class="grid">
-    ${inSeries.map((w) => tile(w, m.works[w.id] && m.works[w.id].primary)).join('\n    ')}
+    ${inSeries.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
   </div>
 </section>`;
-    })
-    .join('\n');
+  }).join('\n');
 
-  return layout({
-    title: `Work — ${site.name}`,
-    description: `Paintings by ${site.name}. ${site.description}`,
-    body: sections,
-    current: '/work/',
-    canonical: '/work/',
+  return layout(L, {
+    title: `${L.t.work} — ${site.name}`, description: L.description, body: sections,
+    current: '/work/', route: '/work/',
   });
 }
 
-function workPage(w, m, prev, next) {
+function workPage(L, w, m, prev, next) {
   const imgs = m.works[w.id] || {};
   const img = imgs.primary;
-  const parts = captionParts(w);
-
-  const views = ['install', 'room']
-    .filter((k) => imgs[k])
-    .map(
-      (k) => `<figure class="reveal">
-    ${picture(imgs[k], {
-      alt: k === 'install' ? `${w.id} installed` : `${w.id} in the gallery`,
-      sizes: '(max-width: 60rem) 100vw, 80vw',
-    })}
-    <figcaption class="caption">${k === 'install' ? 'Installation view' : 'Gallery view'}</figcaption>
-  </figure>`
-    )
-    .join('\n  ');
-
-  const text = [w.description, w.text].filter(Boolean).join('\n\n');
-
-  const series = seriesList.find((s) => s.id === w.series) || {};
+  const parts = captionParts(L, w);
+  const s = L.series[w.series] || {};
   const siblings = works.filter((x) => x.series === w.series && m.works[x.id] && m.works[x.id].primary);
-  // Position comes from the work's own catalogue number, not its place in the
-  // display order. The index runs newest-first, which would otherwise label
-  // R-01-01 as "06 of 06" — contradicting the number printed beside it.
   const own = Number((w.id.match(/(\d+)$/) || [])[1]);
   const highest = Math.max(...siblings.map((x) => Number((x.id.match(/(\d+)$/) || [])[1]) || 0));
   const position = Number.isFinite(own) ? own : siblings.findIndex((x) => x.id === w.id) + 1;
 
-  // A catalogue entry states its fields, including the ones not yet
-  // established — an empty row is honest and shows Meia what to fill in.
+  const views = ['install', 'room'].filter((k) => imgs[k]).map((k) => `<figure class="reveal">
+    ${picture(imgs[k], { alt: `${w.id} — ${k === 'install' ? L.t.installationView : L.t.galleryView}`, sizes: '(max-width: 60rem) 100vw, 80vw' })}
+    <figcaption class="caption">${esc(k === 'install' ? L.t.installationView : L.t.galleryView)}</figcaption>
+  </figure>`).join('\n  ');
+
+  const text = [wtx(L, w, 'description'), wtx(L, w, 'text')].filter(Boolean).join('\n\n');
+
   const rows = [
-    ['Series', `${w.series} · ${series.title || ''}`.trim()],
-    ['Medium', w.medium],
-    ['Dimensions', w.dimensions],
-    ['Year', w.year],
-    ['Reproduction', `${img.full.w} × ${img.height} px from the original file`],
+    [L.t.series, `${w.series} · ${s.title || ''}`.trim()],
+    [L.t.medium, medium(L, w)],
+    [L.t.dimensions, dims(L, w)],
+    [L.t.year, w.year],
+    [L.t.reproduction, `${img.full.w} × ${img.height} ${L.t.fromOriginal}`],
   ];
 
   const thumb = (x, dir) => {
-    const t = m.works[x.id].primary;
-    const small = t.avif[0];
-    return `<a class="${dir}" href="/work/${x.id}/">
+    const t = m.works[x.id].primary, small = t.avif[0];
+    return `<a class="${dir}" href="${url(L, `/work/${x.id}/`)}">
       <img src="${small.src}" width="${small.w}" height="${Math.round(small.w / t.aspect)}" alt="" loading="lazy">
-      <span class="lab"><span class="dir">${dir === 'prev' ? 'Previous' : 'Next'}</span><span>${x.id}</span></span>
+      <span class="lab"><span class="dir">${esc(dir === 'prev' ? L.t.previous : L.t.next)}</span><span>${x.id}</span></span>
     </a>`;
   };
 
   const body = `
 <article>
   <div class="runhead">
-    <span class="series">${esc(w.series)} · ${esc(series.title || '')}</span>
-    <span class="pos">${pad(position)} of ${pad(highest)}</span>
+    <span class="series">${esc(w.series)} · ${esc(s.title || '')}</span>
+    <span class="pos">${pad(position)} ${esc(L.t.of)} ${pad(highest)}</span>
   </div>
 
   <section class="plate">
     <figure class="plate-figure reveal in">
       <span data-zoom-src="${img.full.src}" data-zoom-w="${img.full.w}" data-zoom-h="${img.height}"
-            data-zoom-label="${esc(w.id)}" aria-label="View ${esc(w.id)} at full resolution">
-        ${picture(img, {
-          alt: w.alt || `${w.id}, painting by ${site.name}`,
-          sizes: '(max-width: 60rem) 100vw, 75vw',
-          priority: true,
-        })}
+            data-zoom-label="${esc(w.id)}" aria-label="${esc(w.id)} — ${esc(L.t.clickToEnlarge)}">
+        ${picture(img, { alt: wtx(L, w, 'alt') || `${w.id}, ${site.name}`, sizes: '(max-width: 60rem) 100vw, 75vw', priority: true })}
       </span>
       <figcaption class="plate-caption">
         <span class="id">${w.id}</span>
         ${parts.length ? `<span class="meta" style="text-transform:none;letter-spacing:0">${esc(parts.join(', '))}</span>` : ''}
-        <span class="zoom-hint">Click to enlarge</span>
+        <span class="zoom-hint">${esc(L.t.clickToEnlarge)}</span>
       </figcaption>
     </figure>
   </section>
@@ -344,7 +336,7 @@ function workPage(w, m, prev, next) {
 
   <div class="catalogue reveal">
     <dl>
-      ${rows.map(([k, v]) => `<div class="row"><dt>${k}</dt>${v ? `<dd>${esc(String(v))}</dd>` : '<dd class="pending">not yet recorded</dd>'}</div>`).join('\n      ')}
+      ${rows.map(([k, v]) => `<div class="row"><dt>${esc(k)}</dt>${v ? `<dd>${esc(String(v))}</dd>` : `<dd class="pending">${esc(L.t.notRecorded)}</dd>`}</div>`).join('\n      ')}
     </dl>
   </div>
 
@@ -352,71 +344,56 @@ function workPage(w, m, prev, next) {
 
   <nav class="pager-rich">
     ${prev ? thumb(prev, 'prev') : '<span></span>'}
-    <a class="idx" href="/work/">Index</a>
+    <a class="idx" href="${url(L, '/work/')}">${esc(L.t.index)}</a>
     ${next ? thumb(next, 'next') : '<span></span>'}
   </nav>
 </article>`;
 
-  return layout({
+  return layout(L, {
     title: `${w.id} — ${site.name}`,
-    description: w.description || w.alt || `${w.id}, painting by ${site.name}.`,
-    body,
-    current: '/work/',
-    canonical: `/work/${w.id}/`,
+    description: wtx(L, w, 'description') || wtx(L, w, 'alt') || `${w.id}, ${site.name}.`,
+    body, current: '/work/', route: `/work/${w.id}/`,
     ogImage: img.jpeg[img.jpeg.length - 1].src,
   });
 }
 
-function prosePage({ key, title, current, lede }) {
-  const c = content[key];
+function prosePage(L, { key, route, current }) {
+  const c = L.content[key];
   const body = `<section class="section">
   <div class="prose reveal in">
-    <h1>${esc(c.title || title)}</h1>
-    ${lede ? `<p class="lede">${esc(lede)}</p>` : ''}
+    <h1>${esc(c.title || '')}</h1>
     ${c.html}
   </div>
 </section>`;
-  return layout({
-    title: `${c.title || title} — ${site.name}`,
-    description: site.description,
-    body,
-    current,
-    canonical: current,
-  });
+  return layout(L, { title: `${c.title} — ${site.name}`, description: L.description, body, current, route });
 }
 
-function bioPage() {
+function bioPage(L) {
   const body = `<section class="section">
   <div class="prose reveal in">
-    <h1>${esc(content.biography.title)}</h1>
-    ${content.biography.html}
-    <h2>${esc(content.cv.title)}</h2>
-    ${content.cv.html}
+    <h1>${esc(L.content.biography.title)}</h1>
+    ${L.content.biography.html}
+    <h2>${esc(L.content.cv.title)}</h2>
+    ${L.content.cv.html}
   </div>
 </section>`;
-  return layout({
-    title: `Bio — ${site.name}`,
-    description: `Biography and CV of ${site.name}, artist, New York.`,
-    body,
-    current: '/bio/',
-    canonical: '/bio/',
-  });
+  return layout(L, { title: `${L.content.biography.title} — ${site.name}`, description: L.description, body, current: '/bio/', route: '/bio/' });
 }
 
-function contactPage() {
+function contactPage(L) {
   const body = `<section class="section">
   <div class="prose reveal in">
-    <h1>Contact</h1>
+    <h1>${esc(L.t.contact)}</h1>
     <dl class="contact-list">
-      <div><dt>Enquiries</dt><dd><a href="mailto:${site.email}">${site.email}</a></dd></div>
-      <div><dt>Studio</dt><dd>${esc(site.location)}</dd></div>
-      <div><dt>Instagram</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
-      <div><dt>Tattoo</dt><dd><a href="https://instagram.com/${site.instagram.tattoo}" rel="me noopener">@${site.instagram.tattoo}</a></dd></div>
+      <div><dt>${esc(L.t.enquiries)}</dt><dd><a href="mailto:${site.email}">${site.email}</a></dd></div>
+      <div><dt>${esc(L.t.studio)}</dt><dd>${esc(site.location)}</dd></div>
+      <div><dt>${esc(L.t.instagram)}</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
+      <div><dt>${esc(L.t.tattoo)}</dt><dd><a href="https://instagram.com/${site.instagram.tattoo}" rel="noopener">@${site.instagram.tattoo}</a></dd></div>
     </dl>
-    <p style="margin-top:3rem;color:var(--muted)">For availability, price lists, or high-resolution files for press, please write. Works are photographed and catalogued at full resolution.</p>
+    <p style="margin-top:3rem;color:var(--muted)">${esc(L.t.contactNote)}</p>
   </div>
 </section>`;
-  return layout({ title: `Contact — ${site.name}`, description: `Contact ${site.name}.`, body, current: '/contact/', canonical: '/contact/' });
+  return layout(L, { title: `${L.t.contact} — ${site.name}`, description: L.description, body, current: '/contact/', route: '/contact/' });
 }
 
 /* ------------------------------------------------------------------- write */
@@ -438,39 +415,30 @@ function copyStatic(built) {
   copyDir(path.join(ROOT, 'site', 'styles'), path.join(DIST, 'styles'));
   copyDir(path.join(ROOT, 'site', 'scripts'), path.join(DIST, 'scripts'));
 
-  // A wordmark favicon — no binary asset to keep in sync.
   write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#ffffff"/><rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="#dedad2"/><text x="16" y="22" font-family="American Typewriter,Courier New,Courier,monospace" font-size="16" fill="#111110" text-anchor="middle">M</text></svg>`);
-
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`);
 
-  const urls = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/'].concat(built.map((w) => `/work/${w.id}/`));
-  write(
-    'sitemap.xml',
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-      urls.map((u) => `  <url><loc>${site.domain}${u}</loc></url>`).join('\n') +
-      `\n</urlset>\n`
-  );
+  const routes = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/'].concat(built.map((w) => `/work/${w.id}/`));
+  const urls = [];
+  for (const r of routes) {
+    const alts = LANGS.map((l) => `    <xhtml:link rel="alternate" hreflang="${l.code}" href="${site.domain}${l.prefix}${r}"/>`).join('\n');
+    for (const l of LANGS) urls.push(`  <url>\n    <loc>${site.domain}${l.prefix}${r}</loc>\n${alts}\n  </url>`);
+  }
+  write('sitemap.xml',
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`);
 
-  // GitHub Pages custom domain. Off by default and deliberately so: with a
-  // CNAME present, Pages serves the custom domain only and redirects the
-  // github.io URL to it. While meia-g.art still points at Squarespace that
-  // makes the new site look broken instead of previewable. Set customDomain
-  // in data/site.json once DNS is ready to switch.
   const cnamePath = path.join(DIST, 'CNAME');
   if (site.customDomain) write('CNAME', site.customDomain + '\n');
-  else if (fs.existsSync(cnamePath)) fs.unlinkSync(cnamePath);   // clear a stale one
+  else if (fs.existsSync(cnamePath)) fs.unlinkSync(cnamePath);
 }
 
-/** What still needs Meia's input, so it is visible rather than silently absent. */
 function gapsReport() {
   const rows = works.filter((w) => (w.needs || []).length);
-  if (!rows.length) return console.log('\n  Catalogue complete — no missing fields.\n');
+  if (!rows.length) { console.log('\n  Catalogue complete — no missing fields.\n'); return; }
   console.log(`\n  Catalogue gaps — ${rows.length} of ${works.length} works need details:`);
   for (const w of rows) console.log(`    ${w.id.padEnd(9)} ${w.needs.join(', ')}`);
-  const md =
-    `# Catalogue gaps\n\nThese fields are missing from \`data/works.json\`. The site omits them rather than\nguessing, so filling them in is all that is needed — no template changes.\n\n| Work | Missing |\n| --- | --- |\n` +
-    rows.map((w) => `| ${w.id} | ${w.needs.join(', ')} |`).join('\n') +
-    '\n';
+  const md = `# Catalogue gaps\n\nThese fields are missing from \`data/works.json\`. The site omits them rather than\nguessing, so filling them in is all that is needed — no template changes.\n\n| Work | Missing |\n| --- | --- |\n` +
+    rows.map((w) => `| ${w.id} | ${w.needs.join(', ')} |`).join('\n') + '\n';
   fs.writeFileSync(path.join(ROOT, 'CATALOGUE-GAPS.md'), md);
   console.log('\n  Written to CATALOGUE-GAPS.md\n');
 }
@@ -480,10 +448,7 @@ function gapsReport() {
 (async () => {
   let manifest;
   if (PAGES_ONLY) {
-    if (!fs.existsSync(MANIFEST)) {
-      console.error('\n  No data/manifest.json yet — run a full build first.\n');
-      process.exit(1);
-    }
+    if (!fs.existsSync(MANIFEST)) { console.error('\n  No data/manifest.json yet — run a full build first.\n'); process.exit(1); }
     manifest = JSON.parse(fs.readFileSync(MANIFEST, 'utf8'));
     console.log('  Reusing existing derivatives.');
   } else {
@@ -493,33 +458,27 @@ function gapsReport() {
 
   const present = works.filter((w) => manifest.works[w.id] && manifest.works[w.id].primary);
 
-  write('index.html', indexPage(manifest));
-  write('work/index.html', workIndexPage(manifest));
-  present.forEach((w, i) => {
-    write(`work/${w.id}/index.html`, workPage(w, manifest, present[i - 1], present[i + 1]));
-  });
-  write('refletismo/index.html', prosePage({ key: 'refletismo', title: 'Refletismo', current: '/refletismo/' }));
-  write('statement/index.html', prosePage({ key: 'statement', title: 'Statement', current: '/statement/' }));
-  write('bio/index.html', bioPage());
-  write('contact/index.html', contactPage());
-  write('404.html', layout({
-    title: `Not found — ${site.name}`,
-    description: 'Page not found.',
-    body: `<section class="section"><div class="prose"><h1>Not found</h1><p><a href="/work/">Return to the work →</a></p></div></section>`,
-    current: '', canonical: '/404.html',
+  for (const L of CONTEXTS) {
+    const p = L.prefix;
+    write(`${p}/index.html`.replace(/^\//, ''), indexPage(L, manifest));
+    write(`${p}/work/index.html`.replace(/^\//, ''), workIndexPage(L, manifest));
+    present.forEach((w, i) => write(`${p}/work/${w.id}/index.html`.replace(/^\//, ''), workPage(L, w, manifest, present[i - 1], present[i + 1])));
+    write(`${p}/refletismo/index.html`.replace(/^\//, ''), prosePage(L, { key: 'refletismo', route: '/refletismo/', current: '/refletismo/' }));
+    write(`${p}/statement/index.html`.replace(/^\//, ''), prosePage(L, { key: 'statement', route: '/statement/', current: '/statement/' }));
+    write(`${p}/bio/index.html`.replace(/^\//, ''), bioPage(L));
+    write(`${p}/contact/index.html`.replace(/^\//, ''), contactPage(L));
+    console.log(`  ${L.name.padEnd(11)} ${present.length + 6} pages -> ${p || '/'}`);
+  }
+
+  // One 404 at the root; hosts serve it for any path, so it stays English.
+  write('404.html', layout(CONTEXTS[0], {
+    title: `${CONTEXTS[0].t.notFound} — ${site.name}`, description: 'Page not found.',
+    body: `<section class="section"><div class="prose"><h1>${CONTEXTS[0].t.notFound}</h1><p><a href="/work/">${CONTEXTS[0].t.returnToWork} &rarr;</a></p></div></section>`,
+    current: '', route: '/404.html', switcherRoute: '/',
   }));
 
   copyStatic(present);
 
-  const totalBytes = present.reduce((n, w) => {
-    const e = manifest.works[w.id].primary;
-    return n + e.avif.reduce((a, v) => a + v.bytes, 0) + (e.full ? e.full.bytes : 0);
-  }, 0);
-
-  console.log(`\n  Built ${present.length} works → ${path.relative(process.cwd(), DIST)}`);
-  console.log(`  Primary image derivatives: ${(totalBytes / 1e6).toFixed(1)} MB`);
+  console.log(`\n  Built ${present.length} works in ${CONTEXTS.length} languages`);
   gapsReport();
-})().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+})().catch((e) => { console.error(e); process.exit(1); });

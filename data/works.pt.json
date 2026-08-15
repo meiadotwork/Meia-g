@@ -1,0 +1,39 @@
+{
+  "$comment": "Portuguese alt text and descriptions, keyed by work id. Only works whose English entry has text appear here; anything missing falls back to English rather than showing a blank.",
+
+  "R-02-06": {
+    "alt": "Campo geométrico negro de planos angulares repetidos curvando-se para dentro, profundidade produzida por repetição e pela luz em deslocamento."
+  },
+  "R-02-03": {
+    "alt": "Campo geométrico escuro de formas fragmentadas dobrando-se para dentro, criando profundidade de vórtice por repetição e planos em deslocamento.",
+    "description": "Unidades geométricas fragmentadas curvam-se em uma estrutura de vórtice na qual a profundidade é construída por compressão e repetição. Luz e sombra articulam um campo móvel, desestabilizando a orientação e produzindo uma tensão controlada entre continuidade de superfície e colapso espacial.",
+    "text": "Esta obra funciona como campo perceptivo construído, e não como imagem. Uma rede de unidades geométricas fragmentadas é organizada em uma estrutura curva, semelhante a um vórtice, na qual a repetição se torna o mecanismo primário de produção de profundidade espacial. As formas não descrevem volume no sentido tradicional; elas geram a sensação de profundidade por compressão, fragmentação e variação controlada.\n\nA superfície resiste a uma leitura estável. À medida que o olho percorre a pintura, a orientação começa a mudar — o que num momento aparece como saliência, no seguinte se achata ou recua. Essa instabilidade não é acidental, mas estruturada, e emerge da relação precisa entre luz, sombra e definição de borda. A obra não representa o espaço; ela constrói uma condição na qual o espaço é continuamente negociado.\n\nNão há ponto focal fixo. Em vez disso, o espectador é atraído para um movimento circulante que puxa a percepção para dentro, criando uma sensação de imersão sem resolução. O vórtice não é uma forma literal, mas um efeito perceptivo — resultado do sistema que governa a imagem.\n\nNesse sentido, a pintura funciona como campo ativo em que o ver se torna instável, e a forma existe apenas através do ajuste contínuo da percepção."
+  },
+  "R-02-02": {
+    "alt": "Padrão geométrico negro de formas elípticas em camadas, criando profundidade por repetição, sombra e deslocamentos sutis de superfície.",
+    "description": "Um campo de formas elípticas repetidas constrói um ritmo espacial em que a profundidade emerge de deslocamentos sutis de luz e sombra. A superfície opera como sistema perceptivo, desestabilizando a orientação e comprimindo o volume em uma tensão visual controlada."
+  },
+  "R-02-01": {
+    "alt": "Campo geométrico escuro de blocos repetidos cria profundidade móvel, onde luz e sombra desestabilizam a continuidade espacial.",
+    "description": "Um campo geométrico denso de blocos repetidos constrói um sistema espacial instável. Luz e sombra deslocam-se pela superfície, produzindo profundidade flutuante sem orientação fixa. A estrutura resiste à resolução, sustentando tensão por padrão, compressão e ambiguidade."
+  },
+  "R-01-04": {
+    "alt": "Forma vertical reflexiva comprime-se em uma base arredondada, distorcendo um campo escuro padronizado através de reflexos alongados.",
+    "description": "Uma forma vertical reflexiva desce até uma base comprimida, onde a curvatura intensifica a distorção. Sua superfície estica e dobra o campo circundante em faixas alongadas. O fundo padronizado desloca-se sob ela, desestabilizando a profundidade e sustentando a tensão entre estrutura, superfície e percepção."
+  },
+  "R-01-03": {
+    "alt": "Forma cromada ergue-se contra um campo escuro, refletindo e distorcendo o espaço enquanto um elemento flutuante paira acima.",
+    "description": "Uma forma vertical reflexiva emerge de um campo escuro, sua superfície dobrando e distorcendo o espaço ao redor. Um elemento flutuante acima reforça a instabilidade. O fundo padronizado desloca-se sutilmente, impedindo a resolução espacial e mantendo uma tensão contínua entre forma, campo e percepção."
+  },
+  "R-01-02": {
+    "alt": "Forma reflexiva em laço torce-se sobre um campo escuro padronizado, distorcendo o espaço por curvatura contínua.",
+    "description": "Uma forma em laço torce-se através de si mesma, criando tensão espacial instável. Sua superfície comporta-se como reflexo, distorcendo o campo circundante. O fundo escuro padronizado é dobrado e reinterpretado, impedindo um ponto de vista fixo e mantendo a percepção em ajuste constante."
+  },
+  "R-01-01": {
+    "alt": "Forma de fita reflexiva em curvas contínuas sobre fundo geométrico escuro, com tons de verde, dourado e azul.",
+    "description": "Uma forma contínua semelhante a uma fita dobra-se e enlaça-se pela superfície, criando curvas sobrepostas. Sua superfície reflexiva carrega faixas de verde, dourado e azul que se deslocam pela estrutura. A forma destaca-se contra um fundo escuro padronizado, enfatizando contraste e continuidade."
+  },
+  "R-00-01": {
+    "alt": "Superfície escura facetada composta por planos geométricos repetidos com variações sutis de luz e sombra."
+  }
+}
