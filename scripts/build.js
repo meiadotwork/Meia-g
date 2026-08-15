@@ -173,6 +173,7 @@ ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>document.documentElement.className+=' js'</script>
 </head>
 <body>
 <header>
@@ -191,7 +192,7 @@ ${body}
   <dl class="colophon">
     <div class="col"><dt>${esc(site.name)}</dt><dd>${esc(site.location)}</dd></div>
     <div class="col"><dt>${esc(L.t.instagram)}</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
-    <div class="col"><dt>&copy; ${new Date().getFullYear()}</dt><dd>${esc(L.t.allWorksBy)}</dd></div>
+    <div class="col"><dt>&copy; ${new Date().getFullYear()}</dt><dd>${esc(site.name)}</dd></div>
   </dl>
 </footer>
 <script src="/scripts/app.js" defer></script>
@@ -227,7 +228,6 @@ function indexPage(L, m) {
 <div class="masthead reveal in">
   <h1>${esc(site.name)}</h1>
   <span class="rule"></span>
-  <p class="thesis">${esc(L.description)}</p>
 </div>
 
 <section class="hero">
@@ -240,7 +240,6 @@ function indexPage(L, m) {
 <section class="section">
   <div class="section-head">
     <h2>${esc(L.tagline)} <span class="count">${counts.map((c) => `${c.id} — ${c.n}`).join(' · ')}</span></h2>
-    <p>${esc(L.landingNote)}</p>
   </div>
   <div class="grid">
     ${selected.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
@@ -263,8 +262,7 @@ function workIndexPage(L, m) {
     const n = inSeries.length;
     return `<section class="section">
   <div class="section-head">
-    <h2>${esc(id)} · ${esc(s.title)} <span class="count">${n} ${esc(n === 1 ? L.t.workOne : L.t.workMany)}${span ? ` · ${span}` : ''}</span></h2>
-    <p>${esc(s.note)}</p>
+    <h2>${esc(id)} <span class="count">${n} ${esc(n === 1 ? L.t.workOne : L.t.workMany)}${span ? ` · ${span}` : ''}</span></h2>
   </div>
   <div class="grid">
     ${inSeries.map((w) => tile(L, w, m.works[w.id].primary)).join('\n    ')}
@@ -295,14 +293,6 @@ function workPage(L, w, m, prev, next) {
 
   const text = [wtx(L, w, 'description'), wtx(L, w, 'text')].filter(Boolean).join('\n\n');
 
-  const rows = [
-    [L.t.series, `${w.series} · ${s.title || ''}`.trim()],
-    [L.t.medium, medium(L, w)],
-    [L.t.dimensions, dims(L, w)],
-    [L.t.year, w.year],
-    [L.t.reproduction, `${img.full.w} × ${img.height} ${L.t.fromOriginal}`],
-  ];
-
   const thumb = (x, dir) => {
     const t = m.works[x.id].primary, small = t.avif[0];
     return `<a class="${dir}" href="${url(L, `/work/${x.id}/`)}">
@@ -314,7 +304,7 @@ function workPage(L, w, m, prev, next) {
   const body = `
 <article>
   <div class="runhead">
-    <span class="series">${esc(w.series)} · ${esc(s.title || '')}</span>
+    <span class="series">${esc(w.series)}</span>
     <span class="pos">${pad(position)} ${esc(L.t.of)} ${pad(highest)}</span>
   </div>
 
@@ -327,18 +317,9 @@ function workPage(L, w, m, prev, next) {
       <figcaption class="plate-caption">
         <span class="id">${w.id}</span>
         ${parts.length ? `<span class="meta" style="text-transform:none;letter-spacing:0">${esc(parts.join(', '))}</span>` : ''}
-        <span class="zoom-hint">${esc(L.t.clickToEnlarge)}</span>
       </figcaption>
     </figure>
   </section>
-
-  ${text ? `<div class="work-text reveal">${text.split('\n\n').map((p) => `<p>${esc(p)}</p>`).join('\n')}</div>` : ''}
-
-  <div class="catalogue reveal">
-    <dl>
-      ${rows.map(([k, v]) => `<div class="row"><dt>${esc(k)}</dt>${v ? `<dd>${esc(String(v))}</dd>` : `<dd class="pending">${esc(L.t.notRecorded)}</dd>`}</div>`).join('\n      ')}
-    </dl>
-  </div>
 
   ${views ? `<section class="views section">\n  ${views}\n</section>` : ''}
 
@@ -390,7 +371,6 @@ function contactPage(L) {
       <div><dt>${esc(L.t.instagram)}</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
       <div><dt>${esc(L.t.tattoo)}</dt><dd><a href="https://instagram.com/${site.instagram.tattoo}" rel="noopener">@${site.instagram.tattoo}</a></dd></div>
     </dl>
-    <p style="margin-top:3rem;color:var(--muted)">${esc(L.t.contactNote)}</p>
   </div>
 </section>`;
   return layout(L, { title: `${L.t.contact} — ${site.name}`, description: L.description, body, current: '/contact/', route: '/contact/' });

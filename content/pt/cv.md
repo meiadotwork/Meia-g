@@ -11,10 +11,6 @@ Vive e trabalha em Nova York.
 
 Meia G trabalha principalmente com óleo e acrílico sobre tela e papel, desenvolvendo estruturas abstratas em cromo que exploram reflexão, tensão, confusão perceptiva e ressonância emocional. Seu processo integra esboço digital, estudos de reflexos reais e camadas lentas e deliberadas.
 
-## Exposições
-
-*A acrescentar.*
-
 ## Coleções
 
 Coleções particulares, Estados Unidos.

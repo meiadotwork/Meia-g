@@ -11,10 +11,6 @@ Lives and works in New York.
 
 Meia G works primarily with oil and acrylic on canvas and paper, developing chrome-based abstract structures that explore reflection, tension, perceptual confusion, and emotional resonance. His process integrates digital sketching, observational studies of real reflections, and slow, deliberate layering.
 
-## Exhibitions
-
-*To be added.*
-
 ## Collections
 
 Private collections, United States.

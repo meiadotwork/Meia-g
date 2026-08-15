@@ -11,10 +11,6 @@ Vive y trabaja en Nueva York.
 
 Meia G trabaja principalmente con óleo y acrílico sobre lienzo y papel, desarrollando estructuras abstractas en cromo que exploran la reflexión, la tensión, la confusión perceptiva y la resonancia emocional. Su proceso integra el boceto digital, el estudio de reflejos reales y un estratificado lento y deliberado.
 
-## Exposiciones
-
-*Por añadir.*
-
 ## Colecciones
 
 Colecciones privadas, Estados Unidos.

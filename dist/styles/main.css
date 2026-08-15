@@ -485,8 +485,13 @@ footer a:hover { color: var(--ink); }
 
 /* --------------------------- reveal on scroll ------------------------ */
 
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity var(--fade), transform var(--fade); }
-.reveal.in { opacity: 1; transform: none; }
+/* Scoped to .js, which is set by an inline script in <head>. Without it the
+   work is simply visible. Previously .reveal started at opacity 0 for
+   everyone, so anything that stopped the script running — a JS error, a
+   stripped script, a blocked file — left a page of invisible paintings. The
+   art must never depend on JavaScript to be seen. */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity var(--fade), transform var(--fade); }
+.js .reveal.in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
