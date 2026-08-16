@@ -21,20 +21,18 @@
     {
       "id": "R-02-06",
       "series": "R-02",
-      "year": null,
-      "medium": null,
-      "dimensions": null,
+      "year": 2026,
+      "medium": "Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-02-06/R-02-06_HD.jpg",
       "install": "R-02-06/R-02-06_WW.jpg",
       "room": "R-02-06/R-02-06_WF.jpg",
       "alt": "Black geometric field of repeating angular planes curving inward, depth produced through repetition and shifting light.",
       "description": null,
       "needs": [
-        "year",
-        "medium",
-        "dimensions",
         "description"
-      ]
+      ],
+      "note": "Medium and size given by Meia as the same as the rest of R-02. The year is inferred: every other work in the series is 2026. Correct it here if wrong."
     },
     {
       "id": "R-02-05",
