@@ -188,32 +188,28 @@
   },
   "$media": "Medium names exactly as meia-g_portfolio2026.pdf prints them, including its lower-case 'canvas' and 'paper'.",
   "media": {
-    "Oil and Acrylic on canvas": {
+    "Oil and Acrylic on Canvas": {
       "pt": "Óleo e acrílico sobre tela",
       "es": "Óleo y acrílico sobre lienzo"
     },
-    "Acrylic on canvas": {
+    "Acrylic on Canvas": {
       "pt": "Acrílico sobre tela",
       "es": "Acrílico sobre lienzo"
     },
-    "Acrylic on paper": {
+    "Acrylic on Paper": {
       "pt": "Acrílico sobre papel",
       "es": "Acrílico sobre papel"
     }
   },
   "$dimensions": "Imperial as the portfolio prints it; metric conversions for PT and ES. 35 in = 89 cm, which is what Meia's own PT portfolio prints for R-00-01.",
   "dimensions": {
-    "30 × 40 in": {
-      "pt": "76 × 101 cm",
-      "es": "76 × 101 cm"
+    "30 x 40 in": {
+      "pt": "76 x 101 cm",
+      "es": "76 x 101 cm"
     },
-    "35 × 35 in": {
-      "pt": "89 × 89 cm",
-      "es": "89 × 89 cm"
-    },
-    "30 × 30 in": {
-      "pt": "76 × 76 cm",
-      "es": "76 × 76 cm"
+    "34 x 34 in": {
+      "pt": "86 x 86 cm",
+      "es": "86 x 86 cm"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "$comment": "Single source of truth for the catalogue. `needs` lists fields Meia still has to supply — the site simply omits anything null, so nothing is ever invented. Add a work by adding an object here and dropping its files in masters/<id>/.",
+  "$comment": "Single source of truth for the catalogue. Medium, dimensions and year are transcribed from the captions on meia-g.art, which is the most complete and current source — it covers 13 works where the 2026 portfolio covers 9. `needs` lists what is still outstanding; the site omits anything null.",
   "series": [
     {
       "id": "R-02",
@@ -39,9 +39,9 @@
     {
       "id": "R-02-05",
       "series": "R-02",
-      "year": null,
-      "medium": null,
-      "dimensions": null,
+      "year": 2026,
+      "medium": "Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-02-05/R-02-05_HD.jpg",
       "install": "R-02-05/R-02-05_WW.jpg",
       "room": "R-02-05/R-02-05_WF.jpg",
@@ -49,20 +49,16 @@
       "description": null,
       "needs": [
         "alt",
-        "description",
-        "medium",
-        "dimensions",
-        "year"
+        "description"
       ],
-      "note": "The .txt shipped with this work repeats R-02-03's alt text and description word for word, so it is not used here. Needs its own.",
-      "supersededByPortfolio": "Not listed in meia-g_portfolio2026.pdf. Values previously taken from the meia-g.art captions were: Acrylic on Canvas, 30 × 40 in, 2026. Restore them here if the portfolio is simply incomplete."
+      "note": "The .txt shipped with this work repeats R-02-03's alt text and description word for word, so it is not used here. Needs its own."
     },
     {
       "id": "R-02-04",
       "series": "R-02",
-      "year": null,
-      "medium": null,
-      "dimensions": null,
+      "year": 2026,
+      "medium": "Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-02-04/R-02-04.jpg",
       "install": "R-02-04/R-02-04_WW.jpg",
       "room": "R-02-04/R-02-04_WF.jpg",
@@ -70,38 +66,29 @@
       "description": null,
       "needs": [
         "alt",
-        "description",
-        "medium",
-        "dimensions",
-        "year"
-      ],
-      "supersededByPortfolio": "Not listed in meia-g_portfolio2026.pdf. Values previously taken from the meia-g.art captions were: Acrylic on Canvas, 30 × 40 in, 2026. Restore them here if the portfolio is simply incomplete."
+        "description"
+      ]
     },
     {
       "id": "R-02-03",
       "series": "R-02",
-      "year": null,
-      "medium": null,
-      "dimensions": null,
+      "year": 2026,
+      "medium": "Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-02-03/R-02-03.jpg",
       "install": null,
       "room": null,
       "alt": "Dark geometric field of fragmented forms bending inward, creating a vortex-like depth through repetition and shifting planes.",
       "description": "Fragmented geometric units curve into a vortex-like structure where depth is constructed through compression and repetition. Light and shadow articulate a shifting field, destabilizing orientation and producing a controlled tension between surface continuity and spatial collapse.",
       "text": "This work operates as a constructed perceptual field rather than an image. A network of fragmented geometric units is organized into a curved, vortex-like structure, where repetition becomes the primary mechanism for producing spatial depth. The forms do not describe volume in a traditional sense; instead, they generate the sensation of depth through compression, fragmentation, and controlled variation.\n\nThe surface resists a stable reading. As the eye moves across the painting, orientation begins to shift — what appears as protrusion in one moment flattens or recedes in the next. This instability is not accidental but structured, emerging from the precise relationship between light, shadow, and edge definition. The work does not depict space; it constructs a condition in which space is continuously negotiated.\n\nThere is no fixed focal point. Instead, the viewer is drawn into a circulating movement that pulls perception inward, creating a sense of immersion without resolution. The vortex is not a literal form but a perceptual effect — an outcome of the system governing the image.\n\nIn this sense, the painting functions as an active field where seeing becomes unstable, and form exists only through the continuous adjustment of perception.",
-      "needs": [
-        "medium",
-        "dimensions",
-        "year"
-      ],
-      "supersededByPortfolio": "Not listed in meia-g_portfolio2026.pdf. Values previously taken from the meia-g.art captions were: Acrylic on Canvas, 30 × 40 in, 2026. Restore them here if the portfolio is simply incomplete."
+      "needs": []
     },
     {
       "id": "R-02-02",
       "series": "R-02",
       "year": 2026,
-      "medium": "Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "medium": "Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-02-02/R-02-02_HD.JPG",
       "install": null,
       "room": null,
@@ -112,9 +99,9 @@
     {
       "id": "R-02-01",
       "series": "R-02",
-      "year": 2025,
-      "medium": "Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "year": 2026,
+      "medium": "Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-02-01/RAW/R-02-01.jpg",
       "install": null,
       "room": null,
@@ -125,9 +112,9 @@
     {
       "id": "R-01-06",
       "series": "R-01",
-      "year": null,
-      "medium": null,
-      "dimensions": null,
+      "year": 2026,
+      "medium": "Oil and Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-01-06/R-01-06_hd.jpg",
       "install": "R-01-06/R-01-06_ww.jpg",
       "room": "R-01-06/R-01-06_WF.jpg",
@@ -135,19 +122,15 @@
       "description": null,
       "needs": [
         "alt",
-        "description",
-        "medium",
-        "dimensions",
-        "year"
-      ],
-      "supersededByPortfolio": "Not listed in meia-g_portfolio2026.pdf. Values previously taken from the meia-g.art captions were: Oil and Acrylic on Canvas, 30 × 40 in, 2026. Restore them here if the portfolio is simply incomplete."
+        "description"
+      ]
     },
     {
       "id": "R-01-05",
       "series": "R-01",
       "year": 2026,
-      "medium": "Oil and Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "medium": "Oil and Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-01-05/R-01-05_hd.JPG",
       "install": "R-01-05/R-01-05_ww.jpg",
       "room": null,
@@ -162,8 +145,8 @@
       "id": "R-01-04",
       "series": "R-01",
       "year": 2026,
-      "medium": "Oil and Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "medium": "Oil and Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-01-04/R-01-04_MD.jpg",
       "install": null,
       "room": null,
@@ -176,8 +159,8 @@
       "id": "R-01-03",
       "series": "R-01",
       "year": 2026,
-      "medium": "Oil and Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "medium": "Oil and Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-01-03/R-01-03_HD.jpg",
       "install": null,
       "room": null,
@@ -189,8 +172,8 @@
       "id": "R-01-02",
       "series": "R-01",
       "year": 2025,
-      "medium": "Oil and Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "medium": "Oil and Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-01-02/raw/R-01-02 C.jpg",
       "install": null,
       "room": null,
@@ -202,8 +185,8 @@
       "id": "R-01-01",
       "series": "R-01",
       "year": 2025,
-      "medium": "Oil and Acrylic on canvas",
-      "dimensions": "30 × 40 in",
+      "medium": "Oil and Acrylic on Canvas",
+      "dimensions": "30 x 40 in",
       "master": "R-01-01/raw/R-01-01A.jpg",
       "install": null,
       "room": null,
@@ -215,8 +198,8 @@
       "id": "R-00-02",
       "series": "R-00",
       "year": 2016,
-      "medium": "Acrylic on paper",
-      "dimensions": "30 × 30 in",
+      "medium": "Acrylic on Paper",
+      "dimensions": "34 x 34 in",
       "master": "R-00-02/R-00-02_HD.jpg",
       "install": null,
       "room": null,
@@ -231,8 +214,8 @@
       "id": "R-00-01",
       "series": "R-00",
       "year": 2016,
-      "medium": "Acrylic on paper",
-      "dimensions": "35 × 35 in",
+      "medium": "Acrylic on Paper",
+      "dimensions": "34 x 34 in",
       "master": "R-00-01/R-00-01_HD.jpg",
       "install": null,
       "room": null,

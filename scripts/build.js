@@ -204,7 +204,7 @@ function tile(L, w, img) {
   <span class="tile-frame">
     ${picture(img, { alt: wtx(L, w, 'alt') || `${w.id}, ${site.name}`, sizes: '(max-width: 40rem) 100vw, (max-width: 80rem) 50vw, 33vw' })}
   </span>
-  <span class="caption"><span class="id">${w.id}</span>${parts.length ? `<span>${esc(parts.join(', '))}</span>` : ''}</span>
+  <span class="caption"><span class="id">${w.id}</span>${parts.length ? `, ${esc(parts.join(', '))}` : ''}</span>
 </a>`;
 }
 
@@ -218,7 +218,7 @@ function indexPage(L, m) {
 <section class="hero">
   <figure class="reveal in">
     ${picture(heroImg, { alt: wtx(L, hero, 'alt') || hero.id, sizes: '(max-width: 60rem) 92vw, 60vw', priority: true })}
-    <figcaption class="caption"><span class="id">${hero.id}</span>${captionParts(L, hero).length ? `<span>${esc(captionParts(L, hero).join(', '))}</span>` : ''}</figcaption>
+    <figcaption class="caption"><span class="id">${hero.id}</span>${captionParts(L, hero).length ? `, ${esc(captionParts(L, hero).join(', '))}` : ''}</figcaption>
   </figure>
 </section>
 
@@ -316,8 +316,7 @@ function workPage(L, w, m, prev, next) {
         ${picture(img, { alt: wtx(L, w, 'alt') || `${w.id}, ${site.name}`, sizes: '(max-width: 60rem) 100vw, 75vw', priority: true })}
       </span>
       <figcaption class="plate-caption">
-        <span class="id">${w.id}</span>
-        ${parts.length ? `<span class="meta" style="text-transform:none;letter-spacing:0">${esc(parts.join(', '))}</span>` : ''}
+        <span class="id">${w.id}${parts.length ? `, ${esc(parts.join(', '))}` : ''}</span>
       </figcaption>
     </figure>
   </section>

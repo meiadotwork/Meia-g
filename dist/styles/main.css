@@ -267,6 +267,13 @@ main > .hero:first-child { padding-top: 0; }
   align-items: end;
 }
 
+/* Two across on a phone, as on meia-g.art. Without this the auto-fit
+   minimum forces a single column and each painting fills the screen. */
+@media (max-width: 40rem) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 2rem 1rem; }
+  .caption { font-size: 0.75rem; margin-top: 0.6rem; }
+}
+
 /* Works on paper in the R-00 series are square; canvases are portrait.
    Letting each tile keep its own shape reads as a wall, not a template. */
 .tile { display: block; }
@@ -284,12 +291,16 @@ main > .hero:first-child { padding-top: 0; }
 
 .tile:hover img { transform: scale(1.012); }
 
+/* One run of text, comma separated, as meia-g.art prints it:
+   "R-02-01, Acrylic on Canvas, 30 x 40 in, 2026" */
 .caption {
-  margin-top: 1rem;
+  margin-top: 0.9rem;
   color: var(--muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
+  display: block;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.8125rem;
 }
 .caption .id { color: var(--ink); }
 

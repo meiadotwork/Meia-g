@@ -6,10 +6,9 @@ guessing, so filling them in is all that is needed — no template changes.
 | Work | Missing |
 | --- | --- |
 | R-02-06 | year, medium, dimensions, description |
-| R-02-05 | alt, description, medium, dimensions, year |
-| R-02-04 | alt, description, medium, dimensions, year |
-| R-02-03 | medium, dimensions, year |
-| R-01-06 | alt, description, medium, dimensions, year |
+| R-02-05 | alt, description |
+| R-02-04 | alt, description |
+| R-01-06 | alt, description |
 | R-01-05 | alt, description |
 | R-00-02 | alt, description |
 | R-00-01 | description |
