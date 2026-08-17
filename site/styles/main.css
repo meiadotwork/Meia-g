@@ -147,7 +147,13 @@ header nav a[aria-current="page"] { color: var(--ink); }
   :root { --head-h: 7rem; }
 }
 
-main { padding-top: var(--head-h); }
+/* The bottom padding used to come from the footer. With that gone, the last
+   element — usually the previous/next thumbnails — sat flush against the end
+   of the document and got clipped. */
+main {
+  padding-top: var(--head-h);
+  padding-bottom: clamp(4rem, 12vh, 9rem);
+}
 
 /* The fixed header already supplies the breathing room at the top of a page;
    a full section's padding on top of it just reads as a gap. */
@@ -482,6 +488,9 @@ main > .hero:first-child { padding-top: 0; }
 .pager-rich .lab { font-size: var(--micro); letter-spacing: var(--track); text-transform: uppercase; display: grid; gap: 0.15rem; }
 .pager-rich .lab .dir { color: var(--faint); }
 .pager-rich .idx { justify-self: center; font-size: var(--micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+/* First and last work in a series have no neighbour on one side; the empty
+   placeholder would otherwise leave a blank row once the pager stacks. */
+.pager-rich > span:empty { display: none; }
 .pager-rich .idx:hover { color: var(--ink); }
 @media (max-width: 40rem) {
   .pager-rich { grid-template-columns: 1fr; gap: 1rem; justify-items: start; }

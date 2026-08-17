@@ -287,9 +287,9 @@ function workPage(L, w, m, prev, next) {
   const highest = Math.max(...siblings.map((x) => Number((x.id.match(/(\d+)$/) || [])[1]) || 0));
   const position = Number.isFinite(own) ? own : siblings.findIndex((x) => x.id === w.id) + 1;
 
+  // No labels. A painting on a wall does not need to be captioned as such.
   const views = ['install', 'room'].filter((k) => imgs[k]).map((k) => `<figure class="reveal">
     ${picture(imgs[k], { alt: `${w.id} — ${k === 'install' ? L.t.installationView : L.t.galleryView}`, sizes: '(max-width: 60rem) 100vw, 80vw' })}
-    <figcaption class="caption">${esc(k === 'install' ? L.t.installationView : L.t.galleryView)}</figcaption>
   </figure>`).join('\n  ');
 
   const text = [wtx(L, w, 'description'), wtx(L, w, 'text')].filter(Boolean).join('\n\n');
