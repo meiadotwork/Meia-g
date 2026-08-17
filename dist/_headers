@@ -1,0 +1,12 @@
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/img/*
+  Cache-Control: public, max-age=604800
+
+/styles/*
+  Cache-Control: public, max-age=604800
+
+/scripts/*
+  Cache-Control: public, max-age=604800
+

@@ -398,6 +398,17 @@ function copyStatic(built) {
   write('favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#ffffff"/><rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="#dedad2"/><text x="16" y="22" font-family="American Typewriter,Courier New,Courier,monospace" font-size="16" fill="#111110" text-anchor="middle">M</text></svg>`);
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`);
 
+  // Cloudflare Pages / Netlify read this. Pages are re-fetched so an edit goes
+  // live immediately; derivatives are cached for a week — long enough to matter,
+  // short enough that replacing a painting under the same filename corrects
+  // itself without anyone clearing a cache.
+  write('_headers', [
+    '/*', '  Cache-Control: public, max-age=0, must-revalidate', '',
+    '/img/*', '  Cache-Control: public, max-age=604800', '',
+    '/styles/*', '  Cache-Control: public, max-age=604800', '',
+    '/scripts/*', '  Cache-Control: public, max-age=604800', '',
+  ].join('\n') + '\n');
+
   const seriesIds = [...new Set(built.map((w) => w.series))];
   const routes = ['/', '/work/', '/refletismo/', '/statement/', '/bio/', '/contact/']
     .concat(seriesIds.map((id) => `/work/${id}/`))
