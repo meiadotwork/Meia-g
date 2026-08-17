@@ -1,0 +1,18 @@
+{
+  // Deploy config for Cloudflare Workers static assets.
+  //
+  // `name` MUST match the Worker that already serves meia-g.art. If it does
+  // not, Cloudflare creates a *second* Worker and the domain keeps pointing
+  // at the old one. Check the name at the top of the Worker's page in the
+  // dashboard and correct this line if it differs.
+  "name": "meia-g",
+
+  // dist/ is committed, so there is no build step. Cloudflare uploads the
+  // folder as-is; dist/_headers sets the cache lifetimes.
+  "compatibility_date": "2026-08-17",
+  "assets": {
+    "directory": "./dist",
+    // Serves dist/404.html for unknown paths instead of a bare Cloudflare error.
+    "not_found_handling": "404-page"
+  }
+}
