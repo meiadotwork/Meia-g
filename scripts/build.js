@@ -77,8 +77,18 @@ async function buildImages() {
   const previous = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : { works: {} };
   const manifest = { works: {} };
 
+  // No masters is normal on a CI builder: they are 1.3 GB of camera files kept
+  // in Dropbox, while the derivatives they produce are committed under dist/img.
+  // If a manifest is already there, the derivatives are too — fall back to a
+  // pages-only build rather than failing the deploy. Only a machine with
+  // neither masters nor a manifest has nothing to work from.
   if (!fs.existsSync(MASTERS)) {
-    console.error(`\n  No masters directory at ${MASTERS}`);
+    if (fs.existsSync(MANIFEST)) {
+      console.warn(`\n  No masters at ${MASTERS} — reusing the committed derivatives.`);
+      console.warn('  Run a full build on a machine with the originals to re-encode.\n');
+      return previous;
+    }
+    console.error(`\n  No masters directory at ${MASTERS}, and no data/manifest.json.`);
     console.error('  Put the originals there (see README), or run with --pages to rebuild HTML only.\n');
     process.exit(1);
   }
