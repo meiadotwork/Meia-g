@@ -223,6 +223,13 @@ function indexPage(L, m) {
   const heroImg = m.works[hero.id] && m.works[hero.id].primary;
   const st = L.content.statement;
 
+  // The share card is its own choice, not the hero. Messages tints the caption
+  // bar with a colour sampled from the image, so a painting carrying warm
+  // highlights turns that bar brown. site.shareImage names a work with no such
+  // highlights; see the note in data/site.json.
+  const share = works.find((w) => w.id === site.shareImage);
+  const shareImg = (share && m.works[share.id] && m.works[share.id].primary) || heroImg;
+
   // What meia-g.art opens with: one painting, then the statement. Nothing else.
   const body = `
 <section class="hero">
@@ -242,7 +249,7 @@ function indexPage(L, m) {
   return layout(L, {
     title: `${site.name} — ${L.tagline}`, ogTitle: site.name,
     description: L.description, body,
-    current: '/', route: '/', ogImage: heroImg && heroImg.jpeg[heroImg.jpeg.length - 1].src,
+    current: '/', route: '/', ogImage: shareImg && shareImg.jpeg[shareImg.jpeg.length - 1].src,
   });
 }
 

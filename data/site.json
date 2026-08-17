@@ -14,6 +14,8 @@
   "customDomain": null,
   "$hero": "The painting the landing page opens with — R-01-06, the same one meia-g.art uses.",
   "hero": "R-01-06",
+  "$shareImage": "The painting used for link previews (og:image) — deliberately not the hero. Messages and other apps tint the caption bar under the card with a colour sampled from the image, and R-01-06 carries bright warm highlights (7.4% of its pixels are saturated, averaging rgb 121,92,68), which renders as a brown bar. R-02-03 measures 30,30,27 with 0.5% faint colour, so the bar stays black. Re-measure before changing this: the test is the share of bright saturated pixels, not the overall mean.",
+  "shareImage": "R-02-03",
   "nav": [
     {
       "label": "Work",
