@@ -136,7 +136,7 @@ const url = (L, route) => `${L.prefix}${route}`;
 /** `switcherRoute` exists for the 404: it is a single root page, so the
  *  language links must point at each language's home rather than at
  *  /pt/404.html, which is never generated. */
-function layout(L, { title, description, body, current, ogImage, route, switcherRoute }) {
+function layout(L, { title, description, body, current, ogImage, route, switcherRoute, ogTitle }) {
   const alt = switcherRoute || route;
   const nav = [
     ['/work/', L.t.work], ['/refletismo/', L.t.refletismo], ['/statement/', L.t.statement],
@@ -164,12 +164,12 @@ ${alternates}
 <link rel="alternate" hreflang="x-default" href="${site.domain}${alt}">
 <meta name="theme-color" content="${site.themeColor || '#ffffff'}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="${esc(site.name)}">
-<meta property="og:title" content="${esc(title)}">
+<meta property="og:title" content="${esc(ogTitle || title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:locale" content="${L.code}">
 <meta property="og:url" content="${site.domain}${url(L, route)}">
 ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''}
+<meta name="twitter:title" content="${esc(ogTitle || title)}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -230,7 +230,8 @@ function indexPage(L, m) {
 </section>`;
 
   return layout(L, {
-    title: `${site.name} — ${L.tagline}`, description: L.description, body,
+    title: `${site.name} — ${L.tagline}`, ogTitle: site.name,
+    description: L.description, body,
     current: '/', route: '/', ogImage: heroImg && heroImg.jpeg[heroImg.jpeg.length - 1].src,
   });
 }
