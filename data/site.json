@@ -12,6 +12,8 @@
   "location": "New York",
   "$customDomain": "Leave null until the domain is ready to move. Setting it writes dist/CNAME, at which point GitHub Pages serves only that domain and redirects the github.io preview URL to it — which looks broken while meia-g.art still points at Squarespace. Set to \"www.meia-g.art\" as the last step.",
   "customDomain": null,
+  "$analyticsToken": "Cloudflare Web Analytics beacon token, from Analytics & Logs -> Web Analytics. Null adds no script and no third-party request at all. Only needed for the manual setup; if Cloudflare's automatic setup is used it injects the beacon at the edge and this stays null.",
+  "analyticsToken": null,
   "$hero": "The painting the landing page opens with — R-01-06, the same one meia-g.art uses.",
   "hero": "R-01-06",
   "$shareImage": "The painting used for link previews (og:image) — deliberately not the hero. Messages and other apps tint the caption bar under the card with a colour sampled from the image, and R-01-06 carries bright warm highlights (7.4% of its pixels are saturated, averaging rgb 121,92,68), which renders as a brown bar. R-02-03 measures 30,30,27 with 0.5% faint colour, so the bar stays black. Re-measure before changing this: the test is the share of bright saturated pixels, not the overall mean.",

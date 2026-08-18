@@ -198,7 +198,7 @@ ${ogImage ? `<meta property="og:image" content="${site.domain}${ogImage}">` : ''
 <main>
 ${body}
 </main>
-<script src="/scripts/app.js" defer></script>
+<script src="/scripts/app.js" defer></script>${site.analyticsToken ? `\n<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${esc(site.analyticsToken)}"}'></script>` : ''}
 </body>
 </html>
 `;
