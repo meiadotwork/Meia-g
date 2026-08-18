@@ -370,6 +370,17 @@ main > .hero:first-child { padding-top: 0; }
 .prose a { border-bottom: 1px solid var(--faint); }
 .prose a:hover { border-bottom-color: var(--ink); }
 .prose .lede { color: var(--muted); font-size: 1.0625rem; }
+/* The landing page's only text: the closing lines of Refletismo. It stands
+   alone under the painting, so it is set a step up from body prose and
+   centred. Scoped to .prose to outrank `.prose p`'s margins. */
+.prose .creed {
+  margin: 0;
+  text-align: center;
+  text-wrap: balance;
+  font-size: clamp(1.0625rem, 2.2vw, 1.3125rem);
+  line-height: 1.7;
+  color: var(--ink);
+}
 
 /* description block on a work page */
 .work-text {

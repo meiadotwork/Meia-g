@@ -13,12 +13,15 @@ function inline(s) {
     .replace(/(^|[\s(])\*([^*]+)\*/g, '$1<em>$2</em>');
 }
 
-/** Returns { title, html } — the leading `# Heading` is lifted out as the
- *  title so templates can place it themselves. */
+/** Returns { title, html, paragraphs } — the leading `# Heading` is lifted out
+ *  as the title so templates can place it themselves. `paragraphs` holds the
+ *  body paragraphs, headings excluded, so a page can quote one passage of
+ *  another page's text without a second copy of it going stale. */
 function render(src) {
   const blocks = src.trim().split(/\n{2,}/);
   let title = null;
   const out = [];
+  const paragraphs = [];
 
   for (const raw of blocks) {
     const b = raw.trim();
@@ -31,9 +34,11 @@ function render(src) {
       continue;
     }
     // single newlines inside a block become <br> (used by the CV address block)
-    out.push('<p>' + b.split('\n').map(inline).join('<br>') + '</p>');
+    const text = b.split('\n').map(inline).join('<br>');
+    paragraphs.push(text);
+    out.push('<p>' + text + '</p>');
   }
-  return { title, html: out.join('\n') };
+  return { title, html: out.join('\n'), paragraphs };
 }
 
 module.exports = { render, esc, inline };

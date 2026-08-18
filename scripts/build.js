@@ -230,6 +230,14 @@ function indexPage(L, m) {
   const share = works.find((w) => w.id === site.shareImage);
   const shareImg = (share && m.works[share.id] && m.works[share.id].primary) || heroImg;
 
+  // The landing page closes with the last paragraph of Refletismo — quoted from
+  // that file rather than duplicated, so editing Refletismo edits this too. It
+  // used to reprint the whole Statement, which /statement/ already carries word
+  // for word. Falls back to the statement if Refletismo is ever missing.
+  const ref = L.content.refletismo;
+  const closing = ref && ref.paragraphs && ref.paragraphs.length
+    ? ref.paragraphs[ref.paragraphs.length - 1] : null;
+
   // What meia-g.art opens with: one painting, then the statement. Nothing else.
   const body = `
 <section class="hero">
@@ -241,8 +249,7 @@ function indexPage(L, m) {
 
 <section class="section">
   <div class="prose reveal">
-    <h1>${esc(st.title || '')}</h1>
-    ${st.html}
+    ${closing ? `<p class="creed">${closing}</p>` : `<h1>${esc(st.title || '')}</h1>\n    ${st.html}`}
   </div>
 </section>`;
 
