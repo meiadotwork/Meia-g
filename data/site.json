@@ -12,6 +12,8 @@
   "location": "New York",
   "$customDomain": "Leave null until the domain is ready to move. Setting it writes dist/CNAME, at which point GitHub Pages serves only that domain and redirects the github.io preview URL to it — which looks broken while meia-g.art still points at Squarespace. Set to \"www.meia-g.art\" as the last step.",
   "customDomain": null,
+  "$newsletterFormId": "Kit (ConvertKit) form id — the digits in the form's embed code, e.g. 8391042. Null renders no signup at all. When set, the signup appears on the Contact page only, in every language.",
+  "newsletterFormId": null,
   "$analyticsToken": "Cloudflare Web Analytics beacon token, from Analytics & Logs -> Web Analytics. Null adds no script and no third-party request at all. Only needed for the manual setup; if Cloudflare's automatic setup is used it injects the beacon at the edge and this stays null.",
   "analyticsToken": null,
   "$hero": "The painting the landing page opens with — R-01-06, the same one meia-g.art uses.",

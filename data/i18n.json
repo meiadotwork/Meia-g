@@ -56,7 +56,12 @@
       "viewerLoading": "Loading full resolution…",
       "viewerClose": "Close",
       "viewerActualSize": "actual size",
-      "langLabel": "Language"
+      "langLabel": "Language",
+      "newsletter": "Newsletter",
+      "emailPlaceholder": "Email address",
+      "subscribe": "Subscribe",
+      "subscribeOk": "Thank you. Please confirm the email just sent to you.",
+      "subscribeErr": "That did not go through. Please try again."
     },
     "tagline": "Refletismo",
     "description": "Meia G is a Brazilian-born artist working in New York. His paintings operate as spatial systems rather than images — chrome and controlled black grounds used to expose the instability of perception.",
@@ -111,7 +116,12 @@
       "viewerLoading": "Carregando resolução integral…",
       "viewerClose": "Fechar",
       "viewerActualSize": "tamanho real",
-      "langLabel": "Idioma"
+      "langLabel": "Idioma",
+      "newsletter": "Newsletter",
+      "emailPlaceholder": "Endereço de e-mail",
+      "subscribe": "Inscrever",
+      "subscribeOk": "Obrigado. Confirme o e-mail que acabamos de enviar.",
+      "subscribeErr": "Não foi possível concluir. Tente novamente."
     },
     "tagline": "Refletismo",
     "description": "Meia G é um artista brasileiro radicado em Nova York. Suas pinturas funcionam como sistemas espaciais, e não como imagens — cromo e fundos negros controlados usados para expor a instabilidade da percepção.",
@@ -166,7 +176,12 @@
       "viewerLoading": "Cargando resolución completa…",
       "viewerClose": "Cerrar",
       "viewerActualSize": "tamaño real",
-      "langLabel": "Idioma"
+      "langLabel": "Idioma",
+      "newsletter": "Newsletter",
+      "emailPlaceholder": "Correo electrónico",
+      "subscribe": "Suscribirse",
+      "subscribeOk": "Gracias. Confirma el correo que acabamos de enviarte.",
+      "subscribeErr": "No se pudo completar. Inténtalo de nuevo."
     },
     "tagline": "Refletismo",
     "description": "Meia G es un artista brasileño afincado en Nueva York. Sus pinturas funcionan como sistemas espaciales y no como imágenes — cromo y fondos negros controlados empleados para exponer la inestabilidad de la percepción.",

@@ -386,6 +386,24 @@ function bioPage(L) {
   return layout(L, { title: `${L.content.biography.title} — ${site.name}`, description: L.description, body, current: '/bio/', route: '/bio/' });
 }
 
+/** Kit's own embed ships its own fonts and button styling, which would fight
+ *  the page. This posts to the same endpoint with our own markup instead.
+ *  Without JavaScript the browser submits it normally and Kit shows its
+ *  confirmation page; app.js intercepts it so the reply appears in place. */
+function signupForm(L) {
+  if (!site.newsletterFormId) return '';
+  return `
+    <form class="signup" method="post" action="https://app.kit.com/forms/${esc(site.newsletterFormId)}/subscriptions">
+      <label for="nl-email">${esc(L.t.newsletter)}</label>
+      <div class="signup-row">
+        <input id="nl-email" type="email" name="email_address" required
+               autocomplete="email" spellcheck="false" placeholder="${esc(L.t.emailPlaceholder)}">
+        <button type="submit">${esc(L.t.subscribe)}</button>
+      </div>
+      <p class="signup-msg" data-ok="${esc(L.t.subscribeOk)}" data-err="${esc(L.t.subscribeErr)}" hidden></p>
+    </form>`;
+}
+
 function contactPage(L) {
   const body = `<section class="section">
   <div class="prose reveal in">
@@ -395,7 +413,7 @@ function contactPage(L) {
       <div><dt>${esc(L.t.studio)}</dt><dd>${esc(site.location)}</dd></div>
       <div><dt>${esc(L.t.instagram)}</dt><dd><a href="https://instagram.com/${site.instagram.art}" rel="me noopener">@${site.instagram.art}</a></dd></div>
       <div><dt>${esc(L.t.tattoo)}</dt><dd><a href="https://instagram.com/${site.instagram.tattoo}" rel="noopener">@${site.instagram.tattoo}</a></dd></div>
-    </dl>
+    </dl>${signupForm(L)}
   </div>
 </section>`;
   return layout(L, { title: `${L.t.contact} — ${site.name}`, description: L.description, body, current: '/contact/', route: '/contact/' });

@@ -221,4 +221,33 @@
     else if (e.key === 'ArrowUp') { e.preventDefault(); ty += step; apply(); }
     else if (e.key === 'ArrowDown') { e.preventDefault(); ty -= step; apply(); }
   });
+  /* ------------------------- newsletter signup ----------------------- */
+  /* The form submits on its own without this; here it posts in the
+     background so the reply appears in place instead of sending the
+     visitor to Kit's confirmation page. */
+  var signup = document.querySelector('.signup');
+  if (signup && window.fetch && window.FormData) {
+    signup.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = signup.querySelector('.signup-msg');
+      var button = signup.querySelector('button');
+      button.disabled = true;
+      fetch(signup.action, {
+        method: 'POST',
+        body: new FormData(signup),
+        headers: { Accept: 'application/json' },
+      })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function () {
+          signup.querySelector('input').value = '';
+          msg.textContent = msg.getAttribute('data-ok');
+          msg.hidden = false;
+        })
+        .catch(function () {
+          msg.textContent = msg.getAttribute('data-err');
+          msg.hidden = false;
+        })
+        .then(function () { button.disabled = false; });
+    });
+  }
 })();

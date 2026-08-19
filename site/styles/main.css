@@ -543,6 +543,40 @@ main > .hero:first-child { padding-top: 0; }
 .contact-list dt { color: var(--faint); font-size: var(--micro); letter-spacing: var(--track); text-transform: uppercase; margin-bottom: 0.3rem; }
 .contact-list dd { margin: 0; font-size: 1.0625rem; }
 
+/* Signup, set to read as one more entry in the contact list rather than as a
+   marketing block: same label treatment, same rules, no filled buttons. */
+.signup { margin-top: 1.75rem; }
+.signup label {
+  display: block; color: var(--faint); font-size: var(--micro);
+  letter-spacing: var(--track); text-transform: uppercase; margin-bottom: 0.3rem;
+}
+.signup-row { display: flex; gap: 0.75rem; align-items: baseline; flex-wrap: wrap; }
+.signup input {
+  flex: 1 1 14rem; min-width: 0;
+  font: inherit; font-size: 1.0625rem; color: var(--ink);
+  background: none; border: 0; border-bottom: 1px solid var(--rule);
+  padding: 0.35rem 0; border-radius: 0;
+}
+.signup input::placeholder { color: var(--faint); }
+.signup input:focus { outline: none; border-bottom-color: var(--ink); }
+.signup button {
+  font: inherit; font-size: var(--micro); letter-spacing: var(--track);
+  text-transform: uppercase; color: var(--muted);
+  background: none; border: 0; border-bottom: 1px solid var(--faint);
+  padding: 0.35rem 0; cursor: pointer;
+}
+.signup button:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.signup-msg { margin: 0.75rem 0 0; font-size: var(--micro); color: var(--muted); letter-spacing: 0.02em; }
+/* Side by side there is not room for both on a phone, and the button is the
+   part that gets clipped. Stack them instead of letting it run off the edge. */
+@media (max-width: 34rem) {
+  .signup-row { flex-direction: column; align-items: stretch; gap: 1rem; }
+  /* flex-basis follows the main axis, so the row's `flex: 1 1 14rem` would
+     become a 14rem-tall input once the direction turns to column. */
+  .signup input { flex: 0 0 auto; width: 100%; }
+  .signup button { align-self: start; }
+}
+
 /* ------------------------------ footer ------------------------------ */
 
 footer {
